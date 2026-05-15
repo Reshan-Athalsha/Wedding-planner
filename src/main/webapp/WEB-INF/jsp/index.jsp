@@ -46,7 +46,7 @@
                     <i class="bi bi-calendar-check fs-1 text-warning mb-3"></i>
                     <h4 class="card-title fw-bold">Booking & Payment</h4>
                     <p class="card-text text-muted mb-4">Manage wedding bookings and process payments securely.</p>
-                    <a href="/booking" class="btn btn-outline-warning w-100 rounded-pill fw-bold">Access Portal</a>
+                    <a href="/bookings" class="btn btn-outline-warning w-100 rounded-pill fw-bold">Access Portal</a>
                 </div>
             </div>
         </div>
