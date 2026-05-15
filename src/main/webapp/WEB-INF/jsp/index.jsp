@@ -26,7 +26,7 @@
 <div class="container pb-5 flex-grow-1" id="modules">
     <h2 class="text-center fw-bold mb-5 text-secondary">System Modules Hub</h2>
     <div class="row g-4">
-        
+
         <!-- Component 1: User Portal -->
         <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm border-top border-4 border-primary">
@@ -35,6 +35,18 @@
                     <h4 class="card-title fw-bold">User Portal</h4>
                     <p class="card-text text-muted mb-4">Register new clients, login securely, and manage user profiles.</p>
                     <a href="/register" class="btn btn-outline-primary w-100 rounded-pill fw-bold">Access Portal</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component 3: Booking & Payment -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm border-top border-4 border-warning">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-calendar-check fs-1 text-warning mb-3"></i>
+                    <h4 class="card-title fw-bold">Booking & Payment</h4>
+                    <p class="card-text text-muted mb-4">Manage wedding bookings and process payments securely.</p>
+                    <a href="/booking" class="btn btn-outline-warning w-100 rounded-pill fw-bold">Access Portal</a>
                 </div>
             </div>
         </div>
