@@ -1,5 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Register - WeddingBliss</title>
@@ -23,8 +24,12 @@
                 <div class="card-body p-4">
                     
                     <!-- Feedback Alerts -->
-                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
-                    <div th:if="${param.deleted}" class="alert alert-warning">Your account has been deleted successfully.</div>
+                    <% if (request.getAttribute("error") != null) { %>
+                        <div class="alert alert-danger"><%= request.getAttribute("error") %></div>
+                    <% } %>
+                    <% if (request.getParameter("deleted") != null) { %>
+                        <div class="alert alert-warning">Your account has been deleted successfully.</div>
+                    <% } %>
                     
                     <!-- Registration Form -->
                     <form action="/register" method="POST">

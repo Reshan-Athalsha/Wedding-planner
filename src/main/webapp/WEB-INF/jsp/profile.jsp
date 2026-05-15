@@ -1,5 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>My Profile - WeddingBliss</title>
@@ -33,11 +34,20 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-body text-center p-4">
                     <div class="rounded-circle bg-gradient-primary d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
-                        <h2 class="mb-0 text-white" th:text="${#strings.substring(session.userName, 0, 1).toUpperCase()}">U</h2>
+                        <h2 class="mb-0 text-white">
+                            <% 
+                               String uName = (String) session.getAttribute("userName");
+                               if (uName != null && !uName.isEmpty()) {
+                                   out.print(uName.substring(0, 1).toUpperCase());
+                               } else {
+                                   out.print("U");
+                               }
+                            %>
+                        </h2>
                     </div>
-                    <h4 class="card-title fw-bold" th:text="${session.userName}">User Name</h4>
-                    <p class="text-muted mb-2" th:text="${session.userEmail}">user@example.com</p>
-                    <span class="badge bg-primary px-3 py-2" th:text="${session.userRole}">ROLE</span>
+                    <h4 class="card-title fw-bold">${sessionScope.userName}</h4>
+                    <p class="text-muted mb-2">${sessionScope.userEmail}</p>
+                    <span class="badge bg-primary px-3 py-2">${sessionScope.userRole}</span>
                 </div>
             </div>
             
@@ -62,17 +72,19 @@
                 <div class="card-body p-4">
                     
                     <!-- Success Alert -->
-                    <div th:if="${success}" class="alert alert-success fw-bold" th:text="${success}"></div>
+                    <% if (request.getAttribute("success") != null) { %>
+                        <div class="alert alert-success fw-bold"><%= request.getAttribute("success") %></div>
+                    <% } %>
                     
                     <form action="/profile/update" method="POST">
                         <div class="mb-3">
                             <label class="form-label fw-bold text-muted">Full Name</label>
-                            <input type="text" name="name" class="form-control bg-light" th:value="${session.userName}" required>
+                            <input type="text" name="name" class="form-control bg-light" value="${sessionScope.userName}" required>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label fw-bold text-muted">Email Address <small class="text-danger">(Cannot be changed)</small></label>
-                            <input type="email" class="form-control text-muted" th:value="${session.userEmail}" disabled>
+                            <input type="email" class="form-control text-muted" value="${sessionScope.userEmail}" disabled>
                         </div>
                         
                         <hr class="my-4">

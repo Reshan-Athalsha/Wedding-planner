@@ -1,5 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Login - WeddingBliss</title>
@@ -23,9 +24,15 @@
                 <div class="card-body p-4">
                     
                     <!-- Feedback Alerts -->
-                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
-                    <div th:if="${param.registered}" class="alert alert-success">Registration successful! Please login below.</div>
-                    <div th:if="${param.logout}" class="alert alert-info">You have been logged out securely.</div>
+                    <% if (request.getAttribute("error") != null) { %>
+                        <div class="alert alert-danger"><%= request.getAttribute("error") %></div>
+                    <% } %>
+                    <% if (request.getParameter("registered") != null) { %>
+                        <div class="alert alert-success">Registration successful! Please login below.</div>
+                    <% } %>
+                    <% if (request.getParameter("logout") != null) { %>
+                        <div class="alert alert-info">You have been logged out securely.</div>
+                    <% } %>
                     
                     <!-- Login Form -->
                     <form action="/login" method="POST">

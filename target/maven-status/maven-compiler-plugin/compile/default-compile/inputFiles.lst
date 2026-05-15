@@ -1,12 +1,12 @@
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\weddingplanner\model\User.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\weddingplanner\model\Client.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\util\FileHandler.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\weddingplanner\interfaces\FileOperations.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\interfaces\FileOperations.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\weddingplanner\WeddingplannerApplication.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\weddingplanner\controller\HomeController.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\exception\UserNotFoundException.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\weddingplanner\controller\UserController.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\exception\InvalidPaymentException.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\util\SessionUtil.java
-C:\Users\athal\Desktop\Wedding planner\src\main\java\com\wedding\interfaces\Displayable.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\weddingplanner\controller\UserController.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\util\FileHandler.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\weddingplanner\WeddingplannerApplication.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\weddingplanner\controller\HomeController.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\weddingplanner\model\User.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\weddingplanner\model\Client.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\interfaces\FileOperations.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\interfaces\Displayable.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\util\SessionUtil.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\weddingplanner\interfaces\FileOperations.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\exception\InvalidPaymentException.java
+C:\Users\athal\Documents\GitHub\Wedding-planner\src\main\java\com\wedding\exception\UserNotFoundException.java
