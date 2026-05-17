@@ -1,11 +1,10 @@
-package com.wedding.weddingplanner.controller;
+package com.ttt;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * HomeController serves as the central hub for the Wedding Planner Application.
- * It strictly returns the landing page view containing the navigation grid.
+ * HomeController — Shared landing page and OOP concepts page for TTT.
  */
 @Controller
 public class HomeController {
@@ -13,5 +12,10 @@ public class HomeController {
     @GetMapping("/")
     public String index() {
         return "index";
+    }
+
+    @GetMapping("/oop")
+    public String oopConcepts() {
+        return "oop";
     }
 }
