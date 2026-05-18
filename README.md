@@ -1,6 +1,6 @@
 ﻿# Component 05 - Reviews and Rating System
 
-**Developer:** Rupasinghe S.L.S - IT25XXXXXX
+**Developer:** Rupasinghe S.L.S - IT25101214
 **Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
