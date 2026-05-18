@@ -14,6 +14,7 @@
     h1{font-size:28px;font-weight:700}
     .btn{padding:11px 22px;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
     .btn-primary{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff}
+    .btn-secondary{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15)}
     .btn-danger{background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.4);color:#fca5a5}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
     .card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:24px;transition:transform 0.2s}
@@ -33,7 +34,27 @@
   <div style="display:flex;gap:20px"><a href="/">Home</a><a href="/vendors">Vendors</a><a href="/bookings">Bookings</a><a href="/planning">Planning</a><a href="/reviews">Reviews</a><a href="/admin">Admin</a></div>
 </nav>
 <div class="container">
-  <div class="header"><h1>⭐ Reviews &amp; Ratings</h1><a href="/reviews/submit" class="btn btn-primary">+ Write Review</a></div>
+  <div class="header">
+    <div>
+      <h1>⭐ Reviews &amp; Ratings</h1>
+      <c:if test="${not empty reviews}">
+        <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:6px">
+          Average Rating: <strong style="color:#fbbf24">${avgRating} / 5</strong> &nbsp;·&nbsp; ${reviews.size()} review(s)
+        </p>
+      </c:if>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <c:choose>
+        <c:when test="${sort == 'rating'}">
+          <a href="/reviews" class="btn btn-secondary">Default Order</a>
+        </c:when>
+        <c:otherwise>
+          <a href="/reviews?sort=rating" class="btn btn-secondary">↓ Sort by Rating</a>
+        </c:otherwise>
+      </c:choose>
+      <a href="/reviews/submit" class="btn btn-primary">+ Write Review</a>
+    </div>
+  </div>
   <c:choose>
     <c:when test="${empty reviews}"><div class="empty"><h3>No reviews yet</h3><p>Be the first to review a vendor!</p></div></c:when>
     <c:otherwise>
@@ -42,14 +63,20 @@
           <div class="card">
             <div class="review-header">
               <div><div class="reviewer">${r.userName}</div><div class="vendor-name">→ ${r.vendorId}</div></div>
-              <a href="/reviews/delete/${r.reviewId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Delete?')">✕</a>
+              <div style="display:flex;gap:6px;">
+                <a href="/reviews/edit/${r.reviewId}" class="btn btn-secondary" style="font-size:12px;padding:5px 10px">✎ Edit</a>
+                <a href="/reviews/delete/${r.reviewId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Delete?')">✕</a>
+              </div>
             </div>
             <div class="stars">
               <c:forEach begin="1" end="${r.rating}">★</c:forEach><c:forEach begin="${r.rating + 1}" end="5">☆</c:forEach>
               <span style="color:rgba(255,255,255,0.5);font-size:13px"> ${r.rating}/5</span>
             </div>
             <div class="comment">${r.comment}</div>
-            <span class="badge badge-${r.reviewType.toLowerCase()}">${r.reviewType}</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="badge badge-${r.reviewType.toLowerCase()}">${r.reviewType}</span>
+              <span style="color:rgba(255,255,255,0.35);font-size:11px">${r.reviewDate}</span>
+            </div>
           </div>
         </c:forEach>
       </div>
