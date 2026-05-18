@@ -4,7 +4,7 @@
 
 <div class="container py-5 mt-4">
     <div class="mx-auto" style="max-width: 600px;">
-        <a href="/bookings" class="btn btn-link text-light text-decoration-none mb-3"><i class="bi bi-arrow-left"></i> Back to Bookings</a>
+        <a href="javascript:history.back()" class="btn btn-link text-light text-decoration-none mb-3"><i class="bi bi-arrow-left"></i> Back</a>
         
         <div class="premium-card p-4">
             <h2 class="h4 fw-bold mb-4"><i class="bi bi-pencil text-warning me-2"></i>Edit Booking</h2>
