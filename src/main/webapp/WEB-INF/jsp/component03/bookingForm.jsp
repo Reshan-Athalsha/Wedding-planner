@@ -34,3 +34,4 @@
     <div class="actions"><button type="submit" class="btn btn-primary">Create Booking</button><a href="/bookings" class="btn btn-secondary">Cancel</a></div>
   </form>
 </div></body></html>
+

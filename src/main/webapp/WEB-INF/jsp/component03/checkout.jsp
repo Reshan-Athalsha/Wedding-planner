@@ -38,3 +38,4 @@
     <div class="actions"><button type="submit" class="btn btn-primary">Record Payment</button><a href="/payments" class="btn btn-secondary">Cancel</a></div>
   </form>
 </div></body></html>
+
