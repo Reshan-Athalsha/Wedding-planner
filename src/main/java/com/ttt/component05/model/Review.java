@@ -11,7 +11,7 @@ public abstract class Review implements FileOperations {
     }
     public abstract boolean canEdit();        // ABSTRACTION
     public abstract String getReviewType();   // POLYMORPHISM
-    @Override public String toFileString() { return reviewId+"|"+vendorId+"|"+userName+"|"+rating+"|"+comment.replace("|",";")+"|"+reviewDate+"|"+getReviewType(); }
+    @Override public String toFileString() { return reviewId+"|"+vendorId+"|"+userName+"|"+rating+"|"+comment.replace("|",";").replace("\n"," ").replace("\r","")+"|"+reviewDate+"|"+getReviewType(); }
     public String getReviewId()   { return reviewId; }    public void setReviewId(String v)   { this.reviewId=v; }
     public String getVendorId()   { return vendorId; }    public void setVendorId(String v)   { this.vendorId=v; }
     public String getUserName()   { return userName; }    public void setUserName(String v)   { this.userName=v; }
