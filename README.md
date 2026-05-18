@@ -1,52 +1,41 @@
-﻿# Component 05 - Reviews and Rating System
+﻿# Component 06 - Admin Dashboard and Analytics
 
-**Developer:** Rupasinghe S.L.S - IT25XXXXXX
-**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
+**Developer:** Bandara P.M.D.C - IT25XXXXXX
+**Branch:** Admin-Dashboard-and-Analytics-Bandara.P.M.D.C
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
 ## What This Component Does
-Allows couples to leave star-rated reviews for vendors.
-Two review types are supported: VerifiedReview (from confirmed bookings)
-and PublicReview (open to all). Average ratings calculated per vendor.
-All data stored in data/reviews.txt.
+Provides a system-wide admin dashboard that reads data from
+all 6 component repositories to display live analytics:
+total users, vendors, bookings, payments, reviews, guests,
+confirmed booking count, total revenue, and average ratings.
 
 ## Routes
 | Action | Route |
 |---|---|
-| All Reviews | GET /reviews |
-| Sort Reviews | GET /reviews?sort=rating |
-| Submit Review | GET /reviews/submit |
-| Post Review | POST /reviews/submit |
-| Edit Review | GET /reviews/edit/{id} |
-| Delete Review | GET /reviews/delete/{id} |
+| Admin Dashboard | GET /admin |
+| OOP Overview | GET /oop |
 
 ## My Files
 ```
-src/main/java/com/ttt/component05/
-  model/
-    Review.java           (abstract base class)
-    VerifiedReview.java   (extends Review - from confirmed bookings)
-    PublicReview.java     (extends Review - open reviews)
-  repository/
-    ReviewRepository.java (reads/writes data/reviews.txt)
+src/main/java/com/ttt/component06/
   controller/
-    ReviewController.java (Spring MVC controller)
+    AdminController.java   (aggregates all repositories)
 
-src/main/webapp/WEB-INF/jsp/component05/
-  reviews.jsp, reviewForm.jsp, editReview.jsp
+src/main/webapp/WEB-INF/jsp/component06/
+  adminDashboard.jsp
 ```
 
 ## OOP Principles
-- **Abstraction**: Review is abstract with abstract getReviewType()
-- **Inheritance**: VerifiedReview and PublicReview extend Review
-- **Polymorphism**: Repository saves/loads any Review subtype uniformly
-- **Encapsulation**: All fields private with getters/setters
-- **Information Hiding**: Star rating logic in Review, file I/O in repository
+- **Abstraction**: Uses repository abstractions from all components
+- **Encapsulation**: Each component's data accessed only via its repository
+- **Information Hiding**: AdminController never reads files directly
+- **Polymorphism**: Renders heterogeneous lists (vendors, reviews) via parent types
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Visit: http://localhost:8080/reviews
+# Visit: http://localhost:8080/admin
 ```
