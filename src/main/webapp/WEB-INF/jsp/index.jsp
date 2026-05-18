@@ -10,8 +10,8 @@
                 <h1>Plan Your Perfect<br>Wedding with TTT</h1>
                 <p class="my-4">An enterprise-grade, zero-dependency wedding planning management suite. Seamlessly choreograph vendors, bookings, schedules, and payments on a unified, high-performance architecture.</p>
                 <div class="d-flex gap-3 flex-wrap">
-                    <a href="/register" class="btn-hero">Get Started <i class="bi bi-arrow-right ms-1"></i></a>
-                    <a href="/login" class="btn-hero-outline">Sign In</a>
+                    <a href="/register" class="btn btn-warning btn-lg rounded-pill px-4 fw-bold shadow-sm">Get Started <i class="bi bi-arrow-right"></i></a>
+                    <a href="/login" class="btn btn-outline-light btn-lg rounded-pill px-4 fw-bold">Sign In</a>
                 </div>
             </div>
             <div class="col-lg-5 text-center mt-5 mt-lg-0">
