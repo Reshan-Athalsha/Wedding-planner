@@ -1,133 +1,131 @@
-# 💍 Tie The Tech (TTT) - Wedding Planning Management System
+# Tie The Tech — Wedding Planning System
 
-![Java](https://img.shields.io/badge/Java-17-orange.svg?style=for-the-badge&logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.4-brightgreen.svg?style=for-the-badge&logo=springboot)
-![Architecture](https://img.shields.io/badge/Architecture-MVC%20%7C%20OOP-blue.svg?style=for-the-badge)
-![Database](https://img.shields.io/badge/Database-Zero%20Dependency%20(java.io)-red.svg?style=for-the-badge)
-![Institution](https://img.shields.io/badge/Institution-SLIIT-004488.svg?style=for-the-badge)
+## Component 01: User Management (Authentication, Registration, Profile Management)
 
-Welcome to the enterprise-grade architectural and system documentation for **Tie The Tech (TTT)**, a highly-decoupled Wedding Planning Management System. Developed as a Year 1 Semester 2 project at the Sri Lanka Institute of Information Technology (SLIIT), this system is specifically designed to showcase core **Object-Oriented Programming (OOP)** principles while adhering to strict academic constraints of database-free, pure file-based (`java.io`) persistence.
+**Developer:** Reshan Athalsha  
+**Role Branch:** `User-Management---Athalsha-R-R`  
+**University Evaluation:** Individual Submission - Component 01 Isolation  
 
 ---
 
-## 🏗️ Core Tech Stack & Frameworks
+## 🌟 Executive Summary
 
-The system is built on a modern Java foundation, leveraging Spring Boot for application lifecycle management and MVC routing, combined with custom File I/O persistence to ensure zero database dependencies.
+This repository has been precisely pruned and isolated to showcase **Component 01 - User Management** as part of the individual academic evaluation for the Wedding Planning System, **Tie The Tech (TTT)**. All other system components have been successfully decoupled and disabled to provide a clean, dedicated, compile-safe runtime environment for assessing the core architecture, OOP adherence, and custom flat-file persistence.
 
-* **Language Runtime:** Java 17 (LTS)
-* **Framework:** Spring Boot 3.2.4 (leveraging Spring MVC and embedded Apache Tomcat 10.1)
-* **Presentation Layer:** JavaServer Pages (JSP) + JSTL (Jakarta Standard Tag Library)
-* **Styling & Assets:** Vanilla CSS, Bootstrap 5.3, and Bootstrap Icons 1.11
-* **Persistence Layer:** Custom Local File Persistence (`java.io`) using flat, pipe-delimited (`|`) text files
-* **Build System:** Maven 3.x
+The module provides robust couple registration, session-based secure authentication, and profile customization with high-fidelity UI consistency across all views.
 
 ---
 
-## 📂 Directory Structure & Decoupled Architecture
+## 🚀 Key Features
 
-The repository enforces modular separation of concerns. Each of the core features is isolated in its own sub-package containing its private MVC Controller, Repository, and Model structures, achieving **high cohesion** and **loose coupling**.
+*   **Secure Registration & Login:** Fully responsive, modern user access portals with custom error handling, dynamic input validation, and session lifecycle management.
+*   **File-Based Persistence (`java.io`):** Complete CRUD system operating on a local flat-file database (`data/users.txt`) using high-speed buffered readers and writers.
+*   **Profile Management:** Custom dashboard where couples can update profile data, budget planning, guest counts, and personal wedding themes.
+*   **Custom Security Safeguards:** Integrated custom sanitization utilities to defend the application from file corruption and web vulnerability attacks.
+*   **Global UI Consistency:** Premium dark-themed UI featuring curated gradients, Outfit typography, glassmorphism card highlights, and micro-interactions.
 
+---
+
+## 🛠️ System Architecture
+
+The package layout enforces a clean **Model-View-Controller (MVC)** and **Repository pattern** structure:
+
+```
+src/main/java/com/ttt/
+│
+├── HomeController.java                 # Standard page routing (index, oop)
+├── TttApplication.java                 # Spring Boot application runner
+│
+├── component01/                        # COMPONENT 01 — USER MANAGEMENT
+│   ├── controller/
+│   │   └── UserController.java         # Registration, session login, profile updating
+│   ├── model/
+│   │   ├── User.java                   # Abstract base User model (OOP: Abstraction)
+│   │   └── CoupleUser.java             # Concrete Couple User subclass (OOP: Inheritance)
+│   └── repository/
+│       └── CoupleUserRepository.java   # File-based database engine (OOP: Information Hiding)
+│
+└── shared/
+    ├── FileOperations.java             # Shared interface for file serialization
+    └── SecurityUtils.java              # Encryption, XSS, and delimiter injection guards
+```
+
+---
+
+## 🧩 OOP Principles Applied
+
+The system is engineered in strict compliance with Object-Oriented Programming (OOP) core constraints, avoiding database ORM dependencies to showcase raw software engineering discipline:
+
+| OOP Principle | Technical Implementation & Evidence |
+| :--- | :--- |
+| **Abstraction** | Implemented via the `abstract` base class `com.ttt.component01.model.User` and the `com.ttt.shared.FileOperations` interface. The base class forces a domain model contract by declaring the abstract method `displayRoleDetails()`, abstracting behavior from concrete implementations. |
+| **Inheritance** | The concrete class `CoupleUser` inherits from the abstract class `User` (`public class CoupleUser extends User`). This reuses core properties (`userId`, `name`, `email`, `password`, `role`) while allowing the subclass to extend attributes with couple-specific fields like `weddingDate`, `budget`, `guestCount`, and `theme`. |
+| **Encapsulation** | All domain model fields are declared `private` to enforce information encapsulation. State transitions and modifications are governed strictly through public getters and setters with appropriate type casting, ensuring data integrity. |
+| **Polymorphism** | Leveraged inside `UserController.java` where runtime objects are bound dynamically. During registration, the controller declares a parent reference `User newUser = new CoupleUser(...)` and stores it dynamically. It also overrides `toFileString()` and `displayRoleDetails()` polymorphically. |
+| **Information Hiding** | Handled by `CoupleUserRepository.java`. It hides all low-level file stream interactions, buffer operations, and parsing mechanisms (`BufferedReader`, `BufferedWriter`, `FileWriter`, and delimiter splits) from the controller, presenting only clean CRUD methods (`save`, `findById`, `findAll`). |
+
+---
+
+## 🛡️ Security Implementation
+
+Since persistence is built on a custom pipe-delimited (`|`) flat-file database system, the application is highly vulnerable to injection attacks and cross-site scripting without proper validation. To address this, a dedicated security utility class, `SecurityUtils.java`, was engineered to sanitize and clean all inputs before writing them to the database or rendering them in JSP templates:
+
+### 1. Delimiter Injection Prevention (`|`)
+Because fields in `data/users.txt` are serialized using a pipe separator:
 ```text
-Wedding-planner/
-├── data/                            # Local File-Based Databases (.txt files)
-│   ├── users.txt
-│   └── vendors.txt
-├── src/main/java/com/ttt/
-│   ├── TttApplication.java          # Spring Boot Application Entry Point
-│   ├── HomeController.java          # Multi-module routing landing controller
-│   ├── shared/                      # System-wide Shared Abstractions
-│   ├── component01/                 # User Management (Lead: Reshan Athalsha)
-│   ├── component02/                 # Vendor Management
-│   ├── component03/                 # Booking & Payment Core
-│   ├── component04/                 # Interactive Planning Tools
-│   ├── component05/                 # Ratings & Review System
-│   └── component06/                 # Admin Dashboard & Aggregation
-└── src/main/webapp/WEB-INF/jsp/     # Encapsulated JSP Views
+USR-A7B8C|Reshan Athalsha|reshan@gmail.com|pass123|COUPLE|2026-10-18|50000.0|150|Rustic Floral
 ```
+If a user registers with a name like `John | Admin | extra_data`, the file structure would break, resulting in database corruption or privilege escalation.
+*   **Defense:** `SecurityUtils.sanitizeForFile(input)` searches for and removes all pipes (`|`), carriage returns (`\r`), and newlines (`\n`) to preserve the record structure:
+    ```java
+    public static String sanitizeForFile(String input) {
+        if (input == null) return null;
+        return input.replace("|", "").replace("\n", " ").replace("\r", " ");
+    }
+    ```
+
+### 2. Cross-Site Scripting (XSS) Prevention
+To prevent malicious scripts from being persisted and executed in other users' browsers or administrative views:
+*   **Defense:** `SecurityUtils.escapeHtml(input)` converts dangerous HTML metacharacters into safe, displayable HTML entities:
+    ```java
+    public static String escapeHtml(String input) {
+        if (input == null) return null;
+        return input.replace("&", "&amp;")
+                    .replace("<", "&lt;")
+                    .replace(">", "&gt;")
+                    .replace("\"", "&quot;")
+                    .replace("'", "&#39;");
+    }
+    ```
+
+### 3. Double-Layer Chained Security
+*   The `clean(input)` method chains both functions to deliver bulletproof sanitization before file persistence:
+    ```java
+    public static String clean(String input) {
+        return sanitizeForFile(escapeHtml(input));
+    }
+    ```
 
 ---
 
-## ⚙️ Primary Business Logic & Data Flows
+## 🚀 Running the Application
 
-### A. Modular Data Persistence
-All domain models implement the shared `FileOperations` interface to handle serialization without a traditional SQL database.
+### Prerequisites
+*   Java Development Kit (JDK 17 or higher)
+*   Apache Maven 3.8+
 
-```mermaid
-classDiagram
-    class FileOperations {
-        <<interface>>
-        +toFileString() String
-    }
-    class User {
-        <<abstract>>
-        -userId: String
-        -name: String
-        -email: String
-    }
-    class CoupleUser {
-        -weddingDate: String
-        -budget: double
-        +toFileString() String
-    }
-    FileOperations <|.. User
-    User <|-- CoupleUser
-```
+### Setup & Run
+1.  Clone the branch locally and navigate to the project directory:
+    ```bash
+    git checkout User-Management---Athalsha-R-R
+    ```
+2.  Clean compile and launch the Spring Boot dev server:
+    ```bash
+    mvn clean spring-boot:run
+    ```
+3.  Open your browser and navigate to:
+    ```
+    http://localhost:8080/
+    ```
 
-### B. User Management System (Component 01)
-Demonstrates Abstraction, Polymorphism, and State Encapsulation across user sessions.
-
-```mermaid
-sequenceDiagram
-    participant User as Couple Browser
-    participant Controller as UserController
-    participant Repo as CoupleUserRepository
-    participant DB as data/users.txt
-    
-    User->>Controller: POST /register (name, email)
-    Controller->>Repo: findByEmail(email)
-    Repo->>DB: Scan lines
-    DB-->>Repo: Return lines list
-    Repo-->>Controller: Return existing user or null
-    Alt Email already registered
-        Controller-->>User: Return to /register with Error Message
-    Else Email unique
-        Controller->>Repo: save(CoupleUser)
-        Repo->>DB: Write formatted line (USR-XXXX|Name|Email|...)
-        Controller-->>User: Redirect to /login
-    End
-```
-
----
-
-## 🚀 Local Setup & Run Instructions
-To run this application locally on your workstation, follow these steps:
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Reshan-Athalsha/Wedding-planner.git
-   ```
-
-2. **Navigate to the project directory:**
-   ```bash
-   cd Wedding-planner
-   ```
-
-3. **Build the application using Maven:**
-   ```bash
-   mvn clean install
-   ```
-
-4. **Run the Spring Boot server:**
-   ```bash
-   mvn spring-boot:run
-   ```
-
-5. **Access the application:**
-   Open your web browser and navigate to `http://localhost:8080`.
-
----
-
-## 🛡️ Future Optimizations & Technical Roadmap
-* **Security Patching:** Implement input sanitization utility to prevent delimiter injection (`|`) in flat-file storage.
-* **Testing Implementation:** Integrate JUnit 5 for file read/write validation.
-* **Concurrency Management:** Implement `ReentrantReadWriteLock` for thread-safe `.txt` database updates.
+*Note: Navigation links to components 02-06 are visually marked as disabled in the navigation bar and home page cards to maintain compile safety and isolate the evaluation scope of Component 01.*

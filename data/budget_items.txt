@@ -1,2 +1,0 @@
-BDG-AD6B3|afasd|Lunch|200000.0|0.03
-BDG-6A6EA|Catering|Lunch|900.0|900.0

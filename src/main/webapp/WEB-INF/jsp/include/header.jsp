@@ -92,12 +92,12 @@
         <div class="collapse navbar-collapse" id="mainNav">
             <div class="navbar-nav ms-auto align-items-center gap-2">
                 <a class="nav-link" href="/"><i class="bi bi-house me-1"></i>Home</a>
-                <a class="nav-link" href="/vendors"><i class="bi bi-shop me-1"></i>Vendors</a>
-                <a class="nav-link" href="/bookings"><i class="bi bi-calendar-check me-1"></i>Bookings</a>
-                <a class="nav-link" href="/payments"><i class="bi bi-credit-card me-1"></i>Payments</a>
-                <a class="nav-link" href="/planning/checklist"><i class="bi bi-check2-all me-1"></i>Planning</a>
-                <a class="nav-link" href="/reviews"><i class="bi bi-star me-1"></i>Reviews</a>
-                <a class="nav-link" href="/admin"><i class="bi bi-speedometer2 me-1"></i>Admin</a>
+                <span class="nav-link text-muted" style="cursor: not-allowed; opacity: 0.5;" title="Disabled for Component Isolation"><i class="bi bi-shop me-1"></i>Vendors</span>
+                <span class="nav-link text-muted" style="cursor: not-allowed; opacity: 0.5;" title="Disabled for Component Isolation"><i class="bi bi-calendar-check me-1"></i>Bookings</span>
+                <span class="nav-link text-muted" style="cursor: not-allowed; opacity: 0.5;" title="Disabled for Component Isolation"><i class="bi bi-credit-card me-1"></i>Payments</span>
+                <span class="nav-link text-muted" style="cursor: not-allowed; opacity: 0.5;" title="Disabled for Component Isolation"><i class="bi bi-check2-all me-1"></i>Planning</span>
+                <span class="nav-link text-muted" style="cursor: not-allowed; opacity: 0.5;" title="Disabled for Component Isolation"><i class="bi bi-star me-1"></i>Reviews</span>
+                <span class="nav-link text-muted" style="cursor: not-allowed; opacity: 0.5;" title="Disabled for Component Isolation"><i class="bi bi-speedometer2 me-1"></i>Admin</span>
                 <% if (session.getAttribute("userId") != null) { %>
                     <a class="nav-link" href="/profile"><i class="bi bi-person-circle me-1"></i><%= session.getAttribute("userName") %></a>
                     <a href="/logout" class="btn btn-nav-login ms-2">Logout</a>
