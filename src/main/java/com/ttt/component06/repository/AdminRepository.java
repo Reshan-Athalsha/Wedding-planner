@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.repository;
+package com.ttt.component06.repository;
 import com.ttt.component06.model.Admin;
 import com.ttt.component06.model.ModeratorAdmin;
 import com.ttt.component06.model.SuperAdmin;

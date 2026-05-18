@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.model;
+package com.ttt.component06.model;
 /** COMPONENT 06 - SuperAdmin | OOP: INHERITANCE, POLYMORPHISM */
 public class SuperAdmin extends Admin {
     public SuperAdmin() {}

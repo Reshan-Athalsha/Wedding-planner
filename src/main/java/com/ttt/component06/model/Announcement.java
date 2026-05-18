@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.model;
+package com.ttt.component06.model;
 import com.ttt.shared.FileOperations;
 public class Announcement implements FileOperations {
     private String id, title, content, date;

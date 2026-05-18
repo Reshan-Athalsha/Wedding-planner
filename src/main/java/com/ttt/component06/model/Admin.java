@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.model;
+package com.ttt.component06.model;
 import com.ttt.shared.FileOperations;
 /** COMPONENT 06 - Admin (Abstract Base Class) | OOP: ENCAPSULATION, ABSTRACTION */
 public abstract class Admin implements FileOperations {

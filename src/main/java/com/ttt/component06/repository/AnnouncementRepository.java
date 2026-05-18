@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.repository;
+package com.ttt.component06.repository;
 import com.ttt.component06.model.Announcement;
 import org.springframework.stereotype.Repository;
 import java.io.*;
