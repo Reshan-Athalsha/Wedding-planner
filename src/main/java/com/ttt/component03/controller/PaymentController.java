@@ -62,3 +62,4 @@ public class PaymentController {
     @GetMapping("/delete/{id}")
     public String deletePayment(@PathVariable String id) { paymentRepository.deleteById(id); return "redirect:/payments"; }
 }
+
