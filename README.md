@@ -1,6 +1,6 @@
 ﻿# Component 06 - Admin Dashboard and Analytics
 
-**Developer:** Bandara P.M.D.C - IT25XXXXXX
+**Developer:** Bandara P.M.D.C - IT25103361
 **Branch:** Admin-Dashboard-and-Analytics-Bandara.P.M.D.C
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
