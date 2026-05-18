@@ -1,30 +1,52 @@
-﻿# TTT - Tie The Tech Wedding Planning System
+﻿# Component 05 - Reviews and Rating System
 
-**SE1020 OOP Group Project | Year 1 Semester 2 | University of SLIIT**
-
-A comprehensive, file-based Wedding Planning and Vendor Booking System built with Java and Spring Boot. No databases - pure java.io with strict OOP principles.
-
----
-
-## Team and Components
-
-| No | Component | Developer | Student ID | Branch |
-|---|---|---|---|---|
-| 01 | User Management | Athalsha R.R | IT25101874 | User-Management---Athalsha-R-R |
-| 02 | Vendor Management | Rathnayake R.M.G.C.B.B | IT25103963 | Vendor-Management-Rathnayake-R.M.G.C.B.B |
-| 03 | Booking and Payment | Perera M.A.L.A | IT25XXXXXX | Booking-and-Payment-Management-Perera.M.A.L.A |
-| 04 | Wedding Planning Tools | Ediriweera V.S | IT25XXXXXX | Wedding-Planning-tools-Ediriweera.V.S |
-| 05 | Reviews and Ratings | Rupasinghe S.L.S | IT25XXXXXX | Reviews-and-Rating-System-Rupasinghe.S.L.S |
-| 06 | Admin Dashboard | Bandara P.M.D.C | IT25XXXXXX | Admin-Dashboard-and-Analytics-Bandara.P.M.D.C |
+**Developer:** Rupasinghe S.L.S - IT25XXXXXX
+**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
+**Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
-## Tech Stack
-- Java 17+ / Spring Boot 3.2.4 / JSP + JSTL / Maven
-- File-based persistence (data/*.txt) - No database
+## What This Component Does
+Allows couples to leave star-rated reviews for vendors.
+Two review types are supported: VerifiedReview (from confirmed bookings)
+and PublicReview (open to all). Average ratings calculated per vendor.
+All data stored in data/reviews.txt.
+
+## Routes
+| Action | Route |
+|---|---|
+| All Reviews | GET /reviews |
+| Sort Reviews | GET /reviews?sort=rating |
+| Submit Review | GET /reviews/submit |
+| Post Review | POST /reviews/submit |
+| Edit Review | GET /reviews/edit/{id} |
+| Delete Review | GET /reviews/delete/{id} |
+
+## My Files
+```
+src/main/java/com/ttt/component05/
+  model/
+    Review.java           (abstract base class)
+    VerifiedReview.java   (extends Review - from confirmed bookings)
+    PublicReview.java     (extends Review - open reviews)
+  repository/
+    ReviewRepository.java (reads/writes data/reviews.txt)
+  controller/
+    ReviewController.java (Spring MVC controller)
+
+src/main/webapp/WEB-INF/jsp/component05/
+  reviews.jsp, reviewForm.jsp, editReview.jsp
+```
+
+## OOP Principles
+- **Abstraction**: Review is abstract with abstract getReviewType()
+- **Inheritance**: VerifiedReview and PublicReview extend Review
+- **Polymorphism**: Repository saves/loads any Review subtype uniformly
+- **Encapsulation**: All fields private with getters/setters
+- **Information Hiding**: Star rating logic in Review, file I/O in repository
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Open: http://localhost:8080
+# Visit: http://localhost:8080/reviews
 ```
