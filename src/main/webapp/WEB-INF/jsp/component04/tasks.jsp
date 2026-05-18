@@ -15,7 +15,9 @@
     input,select{width:100%;padding:11px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:14px;font-family:'Outfit',sans-serif;outline:none}
     input:focus,select:focus{border-color:#a78bfa}select option{background:#1a0533}
     .btn{padding:11px 20px;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:opacity 0.2s;text-decoration:none;display:inline-block}
-    .btn-primary{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;width:100%}.btn-danger{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5}
+    .btn-primary{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;width:100%}
+    .btn-secondary{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);color:#fff}
+    .btn-danger{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5}
     .task-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.06)}
     .task-item:last-child{border-bottom:none}
     .task-name{flex:1;font-size:15px}.task-date{color:rgba(255,255,255,0.4);font-size:12px}
@@ -36,12 +38,13 @@
           <c:forEach var="t" items="${tasks}">
             <div class="task-item">
               <div>
-                <span class="badge badge-${t.priority.toLowerCase()}">${t.priority}</span>
-                <span class="badge badge-${t.status == 'DONE' ? 'done' : 'pending'}" style="margin-left:6px">${t.status}</span>
+                <span class="badge badge-${t.taskType.toLowerCase()}">${t.taskType}</span>
+                <span class="badge badge-${t.completed ? 'done' : 'pending'}" style="margin-left:6px">${t.completed ? 'Done' : 'Pending'}</span>
               </div>
               <div class="task-name">${t.title}</div>
               <div class="task-date">${t.dueDate}</div>
               <a href="/planning/tasks/toggle/${t.taskId}" class="btn" style="font-size:12px;padding:6px 12px;background:rgba(167,139,250,0.2);color:#c4b5fd">Toggle</a>
+              <a href="/planning/tasks/edit/${t.taskId}" class="btn btn-secondary" style="font-size:12px;padding:6px 12px">Edit</a>
               <a href="/planning/tasks/delete/${t.taskId}" class="btn btn-danger" style="font-size:12px;padding:6px 12px" onclick="return confirm('Delete?')">✕</a>
             </div>
           </c:forEach>
@@ -50,14 +53,37 @@
     </div>
   </div>
   <div class="card">
-    <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Add Task</h2>
-    <form method="post" action="/planning/tasks/add">
-      <div class="form-group"><label>Task Title</label><input type="text" name="title" id="title" placeholder="e.g. Book the venue" required></div>
-      <div class="form-group"><label>Due Date</label><input type="date" name="dueDate" id="dueDate"></div>
-      <div class="form-group"><label>Priority</label>
-        <select name="priority" id="priority"><option value="HIGH">High</option><option value="MEDIUM" selected>Medium</option><option value="LOW">Low</option></select>
-      </div>
-      <button type="submit" class="btn btn-primary">Add Task</button>
-    </form>
+    <c:choose>
+      <c:when test="${not empty editingTask}">
+        <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Edit Task</h2>
+        <form method="post" action="/planning/tasks/update">
+          <input type="hidden" name="taskId" value="${editingTask.taskId}">
+          <div class="form-group"><label>Task Title</label><input type="text" name="title" id="title" value="${editingTask.title}" placeholder="e.g. Book the venue" required></div>
+          <div class="form-group"><label>Category</label><input type="text" name="category" id="category" value="${editingTask.category}" placeholder="e.g. Venue"></div>
+          <div class="form-group"><label>Due Date</label><input type="date" name="dueDate" id="dueDate" value="${editingTask.dueDate}"></div>
+          <div class="form-group"><label>Priority</label>
+            <select name="taskType" id="taskType">
+              <option value="HIGH" ${editingTask.taskType == 'HIGH' ? 'selected' : ''}>High</option>
+              <option value="MEDIUM" ${editingTask.taskType == 'MEDIUM' ? 'selected' : ''}>Medium</option>
+              <option value="LOW" ${editingTask.taskType == 'LOW' ? 'selected' : ''}>Low</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <a href="/planning/checklist" class="btn btn-secondary" style="display:inline-block;margin-top:12px;width:auto">Cancel</a>
+        </form>
+      </c:when>
+      <c:otherwise>
+        <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Add Task</h2>
+        <form method="post" action="/planning/tasks/add">
+          <div class="form-group"><label>Task Title</label><input type="text" name="title" id="title" placeholder="e.g. Book the venue" required></div>
+          <div class="form-group"><label>Category</label><input type="text" name="category" id="category" placeholder="e.g. Venue"></div>
+          <div class="form-group"><label>Due Date</label><input type="date" name="dueDate" id="dueDate"></div>
+          <div class="form-group"><label>Priority</label>
+            <select name="taskType" id="taskType"><option value="HIGH">High</option><option value="MEDIUM" selected>Medium</option><option value="LOW">Low</option></select>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+      </c:otherwise>
+    </c:choose>
   </div>
 </div></body></html>

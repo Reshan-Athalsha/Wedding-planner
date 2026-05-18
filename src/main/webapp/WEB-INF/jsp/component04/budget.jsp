@@ -21,6 +21,7 @@
     input:focus{border-color:#a78bfa}
     .btn{padding:11px 20px;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
     .btn-primary{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;width:100%}
+    .btn-secondary{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);color:#fff}
     .btn-danger{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5}
     .item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
     .item:last-child{border-bottom:none}
@@ -49,6 +50,7 @@
               <div><div class="item-name">${b.description}</div><div class="item-cat">${b.category}</div></div>
               <div style="display:flex;align-items:center">
                 <span class="item-amount">LKR ${b.actual}</span>
+                <a href="/planning/budget/edit/${b.itemId}" class="btn btn-secondary" style="font-size:12px;padding:5px 10px">Edit</a>
                 <a href="/planning/budget/delete/${b.itemId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Delete?')">✕</a>
               </div>
             </div>
@@ -57,14 +59,30 @@
       </c:choose>
     </div>
     <div class="card">
-      <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Add Expense</h2>
-      <form method="post" action="/planning/budget/add">
-        <div class="form-group"><label>Description</label><input type="text" name="description" placeholder="e.g. Venue Deposit" required></div>
-        <div class="form-group"><label>Category</label><input type="text" name="category" placeholder="e.g. Venue, Catering"></div>
-        <div class="form-group"><label>Estimated (LKR)</label><input type="number" name="estimated" min="0" step="0.01" placeholder="0.00" required></div>
-        <div class="form-group"><label>Actual Spent (LKR)</label><input type="number" name="actual" min="0" step="0.01" placeholder="0.00" value="0"></div>
-        <button type="submit" class="btn btn-primary">Add Expense</button>
-      </form>
+        <c:choose>
+        <c:when test="${not empty editingBudget}">
+          <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Edit Expense</h2>
+          <form method="post" action="/planning/budget/update">
+            <input type="hidden" name="itemId" value="${editingBudget.itemId}">
+            <div class="form-group"><label>Description</label><input type="text" name="description" value="${editingBudget.description}" placeholder="e.g. Venue Deposit" required></div>
+            <div class="form-group"><label>Category</label><input type="text" name="category" value="${editingBudget.category}" placeholder="e.g. Venue, Catering"></div>
+            <div class="form-group"><label>Estimated (LKR)</label><input type="number" name="estimated" min="0" step="0.01" value="${editingBudget.estimated}" placeholder="0.00" required></div>
+            <div class="form-group"><label>Actual Spent (LKR)</label><input type="number" name="actual" min="0" step="0.01" value="${editingBudget.actual}" placeholder="0.00"></div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="/planning/budget" class="btn btn-secondary" style="display:inline-block;margin-top:12px;width:auto">Cancel</a>
+          </form>
+        </c:when>
+        <c:otherwise>
+          <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Add Expense</h2>
+          <form method="post" action="/planning/budget/add">
+            <div class="form-group"><label>Description</label><input type="text" name="description" placeholder="e.g. Venue Deposit" required></div>
+            <div class="form-group"><label>Category</label><input type="text" name="category" placeholder="e.g. Venue, Catering"></div>
+            <div class="form-group"><label>Estimated (LKR)</label><input type="number" name="estimated" min="0" step="0.01" placeholder="0.00" required></div>
+            <div class="form-group"><label>Actual Spent (LKR)</label><input type="number" name="actual" min="0" step="0.01" placeholder="0.00" value="0"></div>
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+          </form>
+        </c:otherwise>
+      </c:choose>
     </div>
   </div>
 </div></body></html>
