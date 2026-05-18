@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -17,9 +16,12 @@ import java.util.UUID;
 public class ReviewController {
     @Autowired private ReviewRepository reviewRepository;
 
+    // READ — List all reviews, optionally sorted by rating desc
     @GetMapping
-    public String listReviews(@RequestParam(required=false) String sort, Model model) {
-        List<Review> reviews = "rating".equals(sort) ? reviewRepository.findByOrderByRatingDesc() : reviewRepository.findAll();
+    public String listReviews(@RequestParam(required = false) String sort, Model model) {
+        List<Review> reviews = "rating".equals(sort)
+                ? reviewRepository.findByOrderByRatingDesc()
+                : reviewRepository.findAll();
         double avgRating = reviews.stream().mapToInt(Review::getRating).average().orElse(0);
         model.addAttribute("reviews", reviews);
         model.addAttribute("avgRating", Math.round(avgRating * 10.0) / 10.0);
@@ -27,46 +29,56 @@ public class ReviewController {
         return "component05/reviews";
     }
 
-    @GetMapping({"/new", "/submit"})
-    public String showReviewForm() { return "component05/reviewForm"; }
-
-    @PostMapping("/new")
-    public String submitReview(@RequestParam String vendorId, @RequestParam String userName,
-                               @RequestParam int rating, @RequestParam String comment,
-                               @RequestParam(defaultValue="PUBLIC") String reviewType, HttpSession session) {
-        String id   = "REV-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
-        String date = LocalDate.now().toString();
-        String name = session.getAttribute("userName") != null ? (String)session.getAttribute("userName") : userName;
-        Review review = "VERIFIED".equals(reviewType) ? new VerifiedReview(id, vendorId, name, rating, comment, date)
-                                                      : new PublicReview(id, vendorId, name, rating, comment, date);
-        reviewRepository.save(review);
-        return "redirect:/reviews";
+    // CREATE — Show form
+    @GetMapping("/submit")
+    public String showReviewForm() {
+        return "component05/reviewForm";
     }
 
+    // CREATE — Process form submission
     @PostMapping("/submit")
-    public String submitReviewForm(@RequestParam String reviewerName, @RequestParam String vendorName,
-                                   @RequestParam int rating, @RequestParam String comment,
-                                   @RequestParam(defaultValue="PUBLIC") String reviewType) {
-        String id   = "REV-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+    public String submitReview(@RequestParam String reviewerName,
+                               @RequestParam String vendorName,
+                               @RequestParam int rating,
+                               @RequestParam String comment,
+                               @RequestParam(defaultValue = "PUBLIC") String reviewType) {
+        String id   = "REV-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         String date = LocalDate.now().toString();
-        Review review = "VERIFIED".equals(reviewType) ? new VerifiedReview(id, vendorName, reviewerName, rating, comment, date)
-                                                      : new PublicReview(id, vendorName, reviewerName, rating, comment, date);
+        Review review = "VERIFIED".equals(reviewType)
+                ? new VerifiedReview(id, vendorName, reviewerName, rating, comment, date)
+                : new PublicReview(id, vendorName, reviewerName, rating, comment, date);
         reviewRepository.save(review);
         return "redirect:/reviews";
     }
 
+    // UPDATE — Show edit form pre-filled with existing review data
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable String id, Model model) {
         reviewRepository.findById(id).ifPresent(r -> model.addAttribute("review", r));
         return "component05/editReview";
     }
 
+    // UPDATE — Process edit form
     @PostMapping("/edit")
-    public String updateReview(@RequestParam String reviewId, @RequestParam int rating, @RequestParam String comment) {
-        reviewRepository.findById(reviewId).ifPresent(r -> { r.setRating(rating); r.setComment(comment); reviewRepository.save(r); });
+    public String updateReview(@RequestParam String reviewId,
+                               @RequestParam String reviewerName,
+                               @RequestParam String vendorName,
+                               @RequestParam int rating,
+                               @RequestParam String comment,
+                               @RequestParam String reviewType) {
+        reviewRepository.findById(reviewId).ifPresent(r -> {
+            Review updated = "VERIFIED".equals(reviewType)
+                    ? new VerifiedReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate())
+                    : new PublicReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate());
+            reviewRepository.save(updated);
+        });
         return "redirect:/reviews";
     }
 
+    // DELETE
     @GetMapping("/delete/{id}")
-    public String deleteReview(@PathVariable String id) { reviewRepository.deleteById(id); return "redirect:/reviews"; }
+    public String deleteReview(@PathVariable String id) {
+        reviewRepository.deleteById(id);
+        return "redirect:/reviews";
+    }
 }
