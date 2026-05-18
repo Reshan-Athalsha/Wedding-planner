@@ -9,13 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-/** COMPONENT 04 — Wedding Planning Tools Controller (Tasks, Budget, Guests) | Full CRUD */
+/**
+ * COMPONENT 04 — Wedding Planning Tools Controller (Tasks, Budget, Guests) |
+ * Full CRUD
+ */
 @Controller
 @RequestMapping("/planning")
 public class PlanningController {
-    @Autowired private TaskRepository taskRepository;
-    @Autowired private BudgetItemRepository budgetRepository;
-    @Autowired private GuestRepository guestRepository;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
+    private BudgetItemRepository budgetRepository;
+    @Autowired
+    private GuestRepository guestRepository;
 
     @GetMapping
     public String planningHome(Model model) {
@@ -38,20 +44,26 @@ public class PlanningController {
 
     @PostMapping("/tasks/add")
     public String addTask(@RequestParam String title, @RequestParam String category,
-                          @RequestParam String dueDate, @RequestParam String taskType) {
-        String id = "TSK-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+            @RequestParam String dueDate, @RequestParam String taskType) {
+        String id = "TSK-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         taskRepository.save(new Task(id, title, category, dueDate, taskType));
         return "redirect:/planning/checklist";
     }
 
     @GetMapping("/tasks/complete/{id}")
     public String completeTask(@PathVariable String id) {
-        taskRepository.findById(id).ifPresent(t -> { t.setCompleted(!t.isCompleted()); taskRepository.save(t); });
+        taskRepository.findById(id).ifPresent(t -> {
+            t.setCompleted(!t.isCompleted());
+            taskRepository.save(t);
+        });
         return "redirect:/planning/checklist";
     }
 
     @GetMapping("/tasks/delete/{id}")
-    public String deleteTask(@PathVariable String id) { taskRepository.deleteById(id); return "redirect:/planning/checklist"; }
+    public String deleteTask(@PathVariable String id) {
+        taskRepository.deleteById(id);
+        return "redirect:/planning/checklist";
+    }
 
     @GetMapping("/tasks/edit/{id}")
     public String editTask(@PathVariable String id, Model model) {
@@ -65,8 +77,8 @@ public class PlanningController {
 
     @PostMapping("/tasks/update")
     public String updateTask(@RequestParam String taskId, @RequestParam String title,
-                             @RequestParam String category, @RequestParam String dueDate,
-                             @RequestParam String taskType) {
+            @RequestParam String category, @RequestParam String dueDate,
+            @RequestParam String taskType) {
         Task existing = taskRepository.findById(taskId).orElse(null);
         Task updated = new Task(taskId, title, category, dueDate, taskType);
         if (existing != null) {
@@ -80,7 +92,7 @@ public class PlanningController {
     public String viewBudget(Model model) {
         List<BudgetItem> items = budgetRepository.findAll();
         double totalEstimated = items.stream().mapToDouble(BudgetItem::getEstimated).sum();
-        double totalActual    = items.stream().mapToDouble(BudgetItem::getActual).sum();
+        double totalActual = items.stream().mapToDouble(BudgetItem::getActual).sum();
         model.addAttribute("budgetItems", items);
         model.addAttribute("totalEstimated", totalEstimated);
         model.addAttribute("totalActual", totalActual);
@@ -90,8 +102,8 @@ public class PlanningController {
 
     @PostMapping("/budget/add")
     public String addBudgetItem(@RequestParam String category, @RequestParam String description,
-                                @RequestParam double estimated, @RequestParam double actual) {
-        String id = "BDG-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+            @RequestParam double estimated, @RequestParam double actual) {
+        String id = "BDG-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         budgetRepository.save(new BudgetItem(id, category, description, estimated, actual));
         return "redirect:/planning/budget";
     }
@@ -100,7 +112,7 @@ public class PlanningController {
     public String editBudgetItem(@PathVariable String id, Model model) {
         List<BudgetItem> items = budgetRepository.findAll();
         double totalEstimated = items.stream().mapToDouble(BudgetItem::getEstimated).sum();
-        double totalActual    = items.stream().mapToDouble(BudgetItem::getActual).sum();
+        double totalActual = items.stream().mapToDouble(BudgetItem::getActual).sum();
         model.addAttribute("budgetItems", items);
         model.addAttribute("totalEstimated", totalEstimated);
         model.addAttribute("totalActual", totalActual);
@@ -111,22 +123,25 @@ public class PlanningController {
 
     @PostMapping("/budget/update")
     public String updateBudgetItem(@RequestParam String itemId,
-                                   @RequestParam String category,
-                                   @RequestParam String description,
-                                   @RequestParam double estimated,
-                                   @RequestParam double actual) {
+            @RequestParam String category,
+            @RequestParam String description,
+            @RequestParam double estimated,
+            @RequestParam double actual) {
         budgetRepository.save(new BudgetItem(itemId, category, description, estimated, actual));
         return "redirect:/planning/budget";
     }
 
     @GetMapping("/budget/delete/{id}")
-    public String deleteBudgetItem(@PathVariable String id) { budgetRepository.deleteById(id); return "redirect:/planning/budget"; }
+    public String deleteBudgetItem(@PathVariable String id) {
+        budgetRepository.deleteById(id);
+        return "redirect:/planning/budget";
+    }
 
     @GetMapping("/guests")
     public String viewGuests(Model model) {
         List<Guest> guests = guestRepository.findAll();
         long confirmed = guests.stream().filter(g -> "CONFIRMED".equals(g.getRsvpStatus())).count();
-        long declined  = guests.stream().filter(g -> "DECLINED".equals(g.getRsvpStatus())).count();
+        long declined = guests.stream().filter(g -> "DECLINED".equals(g.getRsvpStatus())).count();
         model.addAttribute("guests", guests);
         model.addAttribute("confirmedCount", confirmed);
         model.addAttribute("declinedCount", declined);
@@ -137,7 +152,7 @@ public class PlanningController {
     public String editGuest(@PathVariable String id, Model model) {
         List<Guest> guests = guestRepository.findAll();
         long confirmed = guests.stream().filter(g -> "CONFIRMED".equals(g.getRsvpStatus())).count();
-        long declined  = guests.stream().filter(g -> "DECLINED".equals(g.getRsvpStatus())).count();
+        long declined = guests.stream().filter(g -> "DECLINED".equals(g.getRsvpStatus())).count();
         guestRepository.findById(id).ifPresent(g -> model.addAttribute("editingGuest", g));
         model.addAttribute("guests", guests);
         model.addAttribute("confirmedCount", confirmed);
@@ -147,28 +162,34 @@ public class PlanningController {
 
     @PostMapping("/guests/add")
     public String addGuest(@RequestParam String name, @RequestParam String email,
-                           @RequestParam(defaultValue="0") int tableNumber,
-                           @RequestParam(defaultValue="false") boolean plusOne) {
-        String id = "GST-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+            @RequestParam(defaultValue = "0") int tableNumber,
+            @RequestParam(defaultValue = "false") boolean plusOne) {
+        String id = "GST-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         guestRepository.save(new Guest(id, name, email, "PENDING", tableNumber, plusOne));
         return "redirect:/planning/guests";
     }
 
     @PostMapping("/guests/update")
     public String updateGuest(@RequestParam String guestId, @RequestParam String name, @RequestParam String email,
-                              @RequestParam String rsvpStatus,
-                              @RequestParam(defaultValue="0") int tableNumber,
-                              @RequestParam(defaultValue="false") boolean plusOne) {
+            @RequestParam String rsvpStatus,
+            @RequestParam(defaultValue = "0") int tableNumber,
+            @RequestParam(defaultValue = "false") boolean plusOne) {
         guestRepository.save(new Guest(guestId, name, email, rsvpStatus, tableNumber, plusOne));
         return "redirect:/planning/guests";
     }
 
     @GetMapping("/guests/rsvp/{id}/{status}")
     public String updateRsvp(@PathVariable String id, @PathVariable String status) {
-        guestRepository.findById(id).ifPresent(g -> { g.setRsvpStatus(status); guestRepository.save(g); });
+        guestRepository.findById(id).ifPresent(g -> {
+            g.setRsvpStatus(status);
+            guestRepository.save(g);
+        });
         return "redirect:/planning/guests";
     }
 
     @GetMapping("/guests/delete/{id}")
-    public String deleteGuest(@PathVariable String id) { guestRepository.deleteById(id); return "redirect:/planning/guests"; }
+    public String deleteGuest(@PathVariable String id) {
+        guestRepository.deleteById(id);
+        return "redirect:/planning/guests";
+    }
 }

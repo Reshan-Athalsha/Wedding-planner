@@ -70,6 +70,14 @@
         .text-gold { color: #f0c040 !important; }
         .bg-indigo { background-color: #120b24 !important; }
         .bg-gold { background-color: #f0c040 !important; }
+
+        /* Form Input Readability Fix */
+        .form-control, .form-select {
+            color: #120b24 !important; /* Force dark text inside inputs */
+        }
+        .form-control::placeholder {
+            color: #6c757d !important; /* Keep placeholders a standard grey */
+        }
     </style>
 </head>
 <body>
