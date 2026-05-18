@@ -200,18 +200,18 @@
                     <div class="concept-icon" style="background:rgba(66,134,244,0.1)">🛡️</div>
                     <div class="concept-title">5. Information Hiding</div>
                     <div class="concept-desc">
-                        Internal implementation details are hidden from the rest of the system. For example, <em>how</em> data is saved to the database is hidden inside the Repository layer — the Controller only calls <code>save()</code> without knowing the SQL. The password field is never exposed in JSP views.
+                        Internal implementation details are hidden from the rest of the system. For example, <em>how</em> data is parsed, formatted, and written to the text files is completely hidden inside the Repository layer — the Controller only calls <code>save()</code> without knowing the details of file streams, buffers, or parsing logic. The password field is never exposed in JSP views.
                     </div>
                     <div class="where-used">
                         <strong>Where it's used</strong>
-                        <span class="tag">JPA Repository hides SQL</span>
+                        <span class="tag">Repository hides File I/O</span>
                         <span class="tag">private fields</span>
                         <span class="tag">session attributes</span>
                     </div>
                     <div class="code-block">
 <span class="cm">// Controller doesn't know HOW data is saved (hidden)</span>
-clientRepository.<span class="cl">save</span>(client); <span class="cm">// SQL is hidden inside JPA</span>
-
+clientRepository.<span class="cl">save</span>(client); <span class="cm">// File parsing/writing is hidden inside Repository</span>
+ 
 <span class="cm">// Password is private — never directly accessible</span>
 <span class="kw">private</span> String password; <span class="cm">// Hidden from outside world</span>
                     </div>
@@ -266,9 +266,9 @@ clientRepository.<span class="cl">save</span>(client); <span class="cm">// SQL i
                 <div class="d-flex flex-wrap gap-2">
                     <span class="tag">Java 17</span>
                     <span class="tag">Spring Boot 3.2</span>
-                    <span class="tag">Spring Data JPA</span>
-                    <span class="tag">Hibernate ORM</span>
-                    <span class="tag">MySQL (TTT_db)</span>
+                    <span class="tag">Java File I/O (java.io)</span>
+                    <span class="tag">BufferedReader / BufferedWriter</span>
+                    <span class="tag">Plain Text Databases (.txt)</span>
                     <span class="tag">JSP + JSTL</span>
                     <span class="tag">Bootstrap 5</span>
                     <span class="tag">Maven</span>
