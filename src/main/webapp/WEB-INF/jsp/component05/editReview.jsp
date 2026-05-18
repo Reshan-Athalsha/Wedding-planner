@@ -11,8 +11,8 @@
   <form method="post" action="/reviews/edit">
     <input type="hidden" name="reviewId" value="${review.reviewId}">
     <div class="form-row">
-      <div class="form-group"><label>Your Name</label><input type="text" name="reviewerName" value="${review.reviewerName}" required></div>
-      <div class="form-group"><label>Vendor Name</label><input type="text" name="vendorName" value="${review.vendorName}" required></div>
+      <div class="form-group"><label>Your Name</label><input type="text" name="reviewerName" value="${review.userName}" required></div>
+      <div class="form-group"><label>Vendor Name</label><input type="text" name="vendorName" value="${review.vendorId}" required></div>
     </div>
     <div class="form-row">
       <div class="form-group"><label>Rating</label>
