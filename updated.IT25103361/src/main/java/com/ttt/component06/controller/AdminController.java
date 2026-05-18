@@ -81,9 +81,17 @@ public class AdminController {
     @GetMapping("/oop")
     public String oopOverview() { return "component06/oop"; }
 
+     //count rows in file
     private long countLines(String filePath) {
+         //find file path
         Path path = Paths.get(filePath);
-        if (!Files.exists(path)) return 0;
-        try (Stream<String> lines = Files.lines(path)) { return lines.filter(l -> !l.trim().isEmpty()).count(); } catch (Exception e) { return 0; }
+         
+        if (!Files.exists(path)) 
+             return 0;
+        try (Stream<String> lines = Files.lines(path)) { 
+             //ignore blank rows
+             return lines.filter(l -> !l.trim().isEmpty()).count();
+        } catch (Exception e) {
+             return 0; }
     }
 }
