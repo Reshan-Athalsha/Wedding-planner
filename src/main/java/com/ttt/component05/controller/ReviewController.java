@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import com.ttt.shared.SecurityUtils;
 
 /** COMPONENT 05 — Reviews & Ratings Controller (Full CRUD) */
 @Controller
@@ -44,9 +45,14 @@ public class ReviewController {
                                @RequestParam(defaultValue = "PUBLIC") String reviewType) {
         String id   = "REV-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         String date = LocalDate.now().toString();
+        
+        String cleanedReviewerName = SecurityUtils.clean(reviewerName);
+        String cleanedVendorName = SecurityUtils.clean(vendorName);
+        String cleanedComment = SecurityUtils.clean(comment);
+
         Review review = "VERIFIED".equals(reviewType)
-                ? new VerifiedReview(id, vendorName, reviewerName, rating, comment, date)
-                : new PublicReview(id, vendorName, reviewerName, rating, comment, date);
+                ? new VerifiedReview(id, cleanedVendorName, cleanedReviewerName, rating, cleanedComment, date)
+                : new PublicReview(id, cleanedVendorName, cleanedReviewerName, rating, cleanedComment, date);
         reviewRepository.save(review);
         return "redirect:/reviews";
     }
@@ -77,9 +83,13 @@ public class ReviewController {
         reviewRepository.findById(reviewId).ifPresent(r -> {
             // Enforce the canEdit() business rule (Abstraction)
             if (r.canEdit()) {
+                String cleanedReviewerName = SecurityUtils.clean(reviewerName);
+                String cleanedVendorName = SecurityUtils.clean(vendorName);
+                String cleanedComment = SecurityUtils.clean(comment);
+
                 Review updated = "VERIFIED".equals(reviewType)
-                        ? new VerifiedReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate())
-                        : new PublicReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate());
+                        ? new VerifiedReview(reviewId, cleanedVendorName, cleanedReviewerName, rating, cleanedComment, r.getReviewDate())
+                        : new PublicReview(reviewId, cleanedVendorName, cleanedReviewerName, rating, cleanedComment, r.getReviewDate());
                 reviewRepository.save(updated);
             }
         });

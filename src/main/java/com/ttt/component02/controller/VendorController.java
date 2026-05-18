@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
+import com.ttt.shared.SecurityUtils;
 
 /** COMPONENT 02 — Vendor Management Controller (Full CRUD) */
 @Controller
@@ -31,10 +32,17 @@ public class VendorController {
                                @RequestParam String description, @RequestParam String priceRange,
                                @RequestParam String category) {
         String id = "VND-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
-        Vendor vendor = switch (category.toUpperCase()) {
-            case "VENUE"       -> new VenueVendor(id, businessName, location, description, priceRange);
-            case "PHOTOGRAPHY" -> new PhotographyVendor(id, businessName, location, description, priceRange);
-            default            -> new CateringVendor(id, businessName, location, description, priceRange);
+        
+        String cleanedBusinessName = SecurityUtils.clean(businessName);
+        String cleanedLocation = SecurityUtils.clean(location);
+        String cleanedDescription = SecurityUtils.clean(description);
+        String cleanedPriceRange = SecurityUtils.clean(priceRange);
+        String cleanedCategory = SecurityUtils.clean(category);
+
+        Vendor vendor = switch (cleanedCategory.toUpperCase()) {
+            case "VENUE"       -> new VenueVendor(id, cleanedBusinessName, cleanedLocation, cleanedDescription, cleanedPriceRange);
+            case "PHOTOGRAPHY" -> new PhotographyVendor(id, cleanedBusinessName, cleanedLocation, cleanedDescription, cleanedPriceRange);
+            default            -> new CateringVendor(id, cleanedBusinessName, cleanedLocation, cleanedDescription, cleanedPriceRange);
         };
         vendorRepository.save(vendor);
         return "redirect:/vendors";
@@ -57,8 +65,11 @@ public class VendorController {
                                @RequestParam String location,   @RequestParam String description,
                                @RequestParam String priceRange, @RequestParam double rating) {
         vendorRepository.findById(vendorId).ifPresent(v -> {
-            v.setBusinessName(businessName); v.setLocation(location);
-            v.setDescription(description); v.setPriceRange(priceRange); v.setRating(rating);
+            v.setBusinessName(SecurityUtils.clean(businessName)); 
+            v.setLocation(SecurityUtils.clean(location));
+            v.setDescription(SecurityUtils.clean(description)); 
+            v.setPriceRange(SecurityUtils.clean(priceRange)); 
+            v.setRating(rating);
             vendorRepository.save(v);
         });
         return "redirect:/vendors";

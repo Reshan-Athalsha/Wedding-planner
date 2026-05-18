@@ -3,6 +3,7 @@ package com.ttt.component01.controller;
 import com.ttt.component01.model.CoupleUser;
 import com.ttt.component01.model.User;
 import com.ttt.component01.repository.CoupleUserRepository;
+import com.ttt.shared.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +22,20 @@ public class UserController {
     @PostMapping("/register")
     public String processRegistration(@RequestParam String name, @RequestParam String email,
                                       @RequestParam String password, Model model) {
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        String cleanedName = SecurityUtils.clean(name);
+        String cleanedEmail = SecurityUtils.clean(email);
+        String cleanedPassword = SecurityUtils.clean(password);
+
+        if (cleanedName == null || cleanedName.isEmpty() || 
+            cleanedEmail == null || cleanedEmail.isEmpty() || 
+            cleanedPassword == null || cleanedPassword.isEmpty()) {
             model.addAttribute("error", "All fields are required."); return "component01/register";
         }
-        if (userRepository.findByEmail(email) != null) {
+        if (userRepository.findByEmail(cleanedEmail) != null) {
             model.addAttribute("error", "An account with this email already exists."); return "component01/register";
         }
         String uid = "USR-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
-        User newUser = new CoupleUser(uid, name, email, password); // POLYMORPHISM
+        User newUser = new CoupleUser(uid, cleanedName, cleanedEmail, cleanedPassword); // POLYMORPHISM
         userRepository.save((CoupleUser) newUser);
         return "redirect:/login?registered=true";
     }
@@ -73,14 +80,16 @@ public class UserController {
         if (uid == null) return "redirect:/login";
         CoupleUser user = userRepository.findById(uid).orElse(null);
         if (user == null) return "redirect:/login";
-        user.setName(name);
-        if (!password.isEmpty()) user.setPassword(password);
-        if (weddingDate != null && !weddingDate.isEmpty()) user.setWeddingDate(weddingDate);
+        
+        String cleanedName = SecurityUtils.clean(name);
+        user.setName(cleanedName);
+        if (!password.isEmpty()) user.setPassword(SecurityUtils.clean(password));
+        if (weddingDate != null && !weddingDate.isEmpty()) user.setWeddingDate(SecurityUtils.clean(weddingDate));
         if (budget > 0) user.setBudget(budget);
         if (guestCount > 0) user.setGuestCount(guestCount);
-        if (theme != null && !theme.isEmpty()) user.setTheme(theme);
+        if (theme != null && !theme.isEmpty()) user.setTheme(SecurityUtils.clean(theme));
         userRepository.save(user);
-        session.setAttribute("userName", name);
+        session.setAttribute("userName", cleanedName);
         model.addAttribute("success", "Profile updated successfully.");
         model.addAttribute("coupleUser", user);
         return "component01/profile";
