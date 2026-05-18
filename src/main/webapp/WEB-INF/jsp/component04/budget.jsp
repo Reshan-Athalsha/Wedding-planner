@@ -37,7 +37,7 @@
   <h1>💰 Budget Tracker</h1>
   <div class="total-card">
     <div class="total-label">Total Spent</div>
-    <div class="total-amount">LKR ${totalBudget}</div>
+    <div class="total-amount">LKR ${totalActual}</div>
   </div>
   <div class="layout">
     <div class="card">
@@ -48,7 +48,7 @@
             <div class="item">
               <div><div class="item-name">${b.description}</div><div class="item-cat">${b.category}</div></div>
               <div style="display:flex;align-items:center">
-                <span class="item-amount">LKR ${b.amount}</span>
+                <span class="item-amount">LKR ${b.actual}</span>
                 <a href="/planning/budget/delete/${b.itemId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Delete?')">✕</a>
               </div>
             </div>

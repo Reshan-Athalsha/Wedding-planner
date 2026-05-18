@@ -31,10 +31,10 @@
     <c:choose>
       <c:when test="${empty guests}"><div class="empty"><p>No guests added yet</p></div></c:when>
       <c:otherwise>
-        <table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>RSVP</th><th></th></tr></thead>
+        <table><thead><tr><th>Name</th><th>Email</th><th>Table</th><th>Plus One</th><th>RSVP</th><th></th></tr></thead>
           <tbody><c:forEach var="g" items="${guests}">
             <tr>
-              <td>${g.name}</td><td>${g.email}</td><td>${g.phone}</td>
+              <td>${g.name}</td><td>${g.email}</td><td>${g.tableNumber}</td><td>${g.plusOne ? 'Yes' : 'No'}</td>
               <td><span class="badge badge-${g.rsvpStatus.toLowerCase()}">${g.rsvpStatus}</span></td>
               <td><a href="/planning/guests/delete/${g.guestId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Remove guest?')">✕</a></td>
             </tr>
