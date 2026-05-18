@@ -11,17 +11,20 @@ import java.time.LocalDate;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-
+//tells spring to this is controller class
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
+     //get access from repository
      private AdminRepository adminRepository;
      private AnnouncementRepository announcementRepository;
 
+     //browser page open request 
     @GetMapping
+     //Model --> send data from controller to html
     public String adminDashboard(Model model) {
-        // Read file line counts directly to decouple Component 6 from Components 1-5
+        
         model.addAttribute("userCount",    countLines("data/users.txt"));
         model.addAttribute("vendorCount",  countLines("data/vendors.txt"));
         model.addAttribute("bookingCount", countLines("data/bookings.txt"));
@@ -34,7 +37,7 @@ public class AdminController {
         return "component06/adminDashboard";
     }
 
-    // --- ADMIN CRUD ---
+    // ADMIN CRUD 
     @GetMapping("/admins")
     public String listAdmins(Model model) {
         model.addAttribute("admins", adminRepository.findAll());
@@ -44,19 +47,25 @@ public class AdminController {
     @PostMapping("/admins/new")
     public String createAdmin(@RequestParam String username, @RequestParam String email, 
                               @RequestParam String password, @RequestParam String role) {
+          //create unique ID
         String id = "ADM-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+         
         Admin admin = "SUPER_ADMIN".equals(role) ? new SuperAdmin(id, username, password, email) 
                                                  : new ModeratorAdmin(id, username, password, email);
+         
+         //save into file
         adminRepository.save(admin);
         return "redirect:/admin/admins";
     }
 
+     //delete admin
     @GetMapping("/admins/delete/{id}")
     public String deleteAdmin(@PathVariable String id) {
-        adminRepository.delete(id); return "redirect:/admin/admins";
+        adminRepository.delete(id); 
+         return "redirect:/admin/admins";
     }
 
-    // --- ANNOUNCEMENT CRUD ---
+    // ANNOUNCEMENT CRUD 
     @PostMapping("/announcements/new")
     public String createAnnouncement(@RequestParam String title, @RequestParam String content) {
         String id = "ANN-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
