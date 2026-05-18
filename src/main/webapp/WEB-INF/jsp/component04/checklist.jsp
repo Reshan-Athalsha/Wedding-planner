@@ -36,8 +36,8 @@
           <c:forEach var="t" items="${tasks}">
             <div class="task-item">
               <div>
-                <span class="badge badge-${t.priority.toLowerCase()}">${t.priority}</span>
-                <span class="badge badge-${t.status == 'DONE' ? 'done' : 'pending'}" style="margin-left:6px">${t.status}</span>
+                <span class="badge badge-${not empty t.taskType ? t.taskType.toLowerCase() : 'medium'}">${t.taskType}</span>
+                <span class="badge badge-${t.completed ? 'done' : 'pending'}" style="margin-left:6px">${t.completed ? 'DONE' : 'PENDING'}</span>
               </div>
               <div class="task-name">${t.title}</div>
               <div class="task-date">${t.dueDate}</div>
