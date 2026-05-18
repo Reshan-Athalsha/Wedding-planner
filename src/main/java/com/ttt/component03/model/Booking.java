@@ -21,3 +21,4 @@ public class Booking implements FileOperations {
     public String getStatus()      { return status; }      public void setStatus(String v)      { this.status=v; }
     public String getCreatedDate() { return createdDate; } public void setCreatedDate(String v) { this.createdDate=v; }
 }
+
