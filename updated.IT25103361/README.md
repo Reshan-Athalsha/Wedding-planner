@@ -19,14 +19,16 @@ Serves as the central administrative hub for the entire wedding planning system.
 **Dashboard & Announcements**
 | Action | Route |
 |---|---|
-| View Dashboard | /admin/admins |
+| View Dashboard | GET /admin/admins |
 | Post Announcement | POST /admin/announcements/new |
 | Delete Announcement| GET /admin/announcements/delete/{id} |
 
 **Administrator Management**
+| Action | Route |
+|---|---|
 | List All Admins | GET /admin/admins |
-| Add Admin | POST  /admin/admins/new |
-| Remove Admin | GET /admin/admins/delete/{id} |
+| Add Admin | POST /admin/admins/new |
+| Remove Admin| GET /admin/admins/delete/{id} |
 
 ## My Files
 ```
