@@ -1,6 +1,6 @@
 ﻿# Component 04 - Wedding Planning Tools
 
-**Developer:** Ediriweera V.S - IT25XXXXXX
+**Developer:** Ediriweera V.S - IT25101455
 **Branch:** Wedding-Planning-tools-Ediriweera.V.S
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
