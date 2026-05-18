@@ -18,17 +18,27 @@ public class AdminRepository {
     
     public List<Admin> findAll() {
         List<Admin> list = new ArrayList<>();
-        if(!getFile().exists()) return list;
+        if(!getFile().exists())
+            return list;  //if file not found return empty list
+        
         try(BufferedReader br=new BufferedReader(new FileReader(getFile()))) {
-            String line; while((line=br.readLine())!=null) {
-                if(line.trim().isEmpty()) continue;
-                String[] p = line.split("\\|");
+            String line;
+            
+            while((line=br.readLine())!=null) //keep reading until file ends
+            {
+                if(line.trim().isEmpty()) //ignore empty lines
+                    continue;
+                String[] p = line.split("\\|"); //(|) split lines into pieces
+                
                 if(p.length>=5) {
-                    if("SUPER_ADMIN".equals(p[4])) list.add(new SuperAdmin(p[0],p[1],p[2],p[3]));
-                    else list.add(new ModeratorAdmin(p[0],p[1],p[2],p[3]));
+                    if("SUPER_ADMIN".equals(p[4]))
+                        list.add(new SuperAdmin(p[0],p[1],p[2],p[3]));
+                    else 
+                        list.add(new ModeratorAdmin(p[0],p[1],p[2],p[3]));
                 }
             }
         } catch(Exception e) {}
+        
         return list;
     }
     public void save(Admin admin) {
