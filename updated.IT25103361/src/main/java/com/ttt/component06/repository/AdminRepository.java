@@ -9,7 +9,13 @@ import java.util.*;
 @Repository
 public class AdminRepository {
     private final String FILE = "data/admins.txt";
-    private File getFile() { File f=new File(FILE); f.getParentFile().mkdirs(); return f; }
+    
+    private File getFile() {
+        File f=new File(FILE);
+        f.getParentFile().mkdirs();
+        return f; 
+    }
+    
     public List<Admin> findAll() {
         List<Admin> list = new ArrayList<>();
         if(!getFile().exists()) return list;
@@ -27,11 +33,25 @@ public class AdminRepository {
     }
     public void save(Admin admin) {
         List<Admin> all=findAll(); boolean found=false;
-        for(int i=0;i<all.size();i++){ if(all.get(i).getAdminId().equals(admin.getAdminId())){ all.set(i,admin); found=true; break; } }
+        for(int i=0;i<all.size();i++){ 
+            if(all.get(i).getAdminId().equals(admin.getAdminId())){
+                all.set(i,admin); found=true; break; 
+            }
+        }
         if(!found) all.add(admin); writeAll(all);
     }
-    public void delete(String id) { List<Admin> all=findAll(); all.removeIf(a->a.getAdminId().equals(id)); writeAll(all); }
+    public void delete(String id) {
+        List<Admin> all=findAll(); 
+        all.removeIf(a->a.getAdminId().equals(id)); 
+        writeAll(all); 
+    }
     private void writeAll(List<Admin> all) {
-        try(BufferedWriter bw=new BufferedWriter(new FileWriter(getFile()))) { for(Admin a:all){ bw.write(a.toFileString()); bw.newLine(); } } catch(Exception e){}
+        try(BufferedWriter bw=new BufferedWriter(new FileWriter(getFile()))) {
+            for(Admin a:all){
+                bw.write(a.toFileString()); 
+                bw.newLine(); 
+            } 
+        }
+            catch(Exception e){}
     }
 }
