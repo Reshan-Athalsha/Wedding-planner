@@ -10,18 +10,19 @@
   <h2>✏️ Edit Booking</h2>
   <form method="post" action="/bookings/edit">
     <input type="hidden" name="bookingId" value="${booking.bookingId}">
+    <input type="hidden" name="createdDate" value="${booking.createdDate}">
     <div class="form-row">
+      <div class="form-group"><label>Client Name</label><input type="text" name="clientName" value="${booking.clientName}" required></div>
       <div class="form-group"><label>Vendor Name</label><input type="text" name="vendorName" value="${booking.vendorName}" required></div>
+    </div>
+    <div class="form-row">
       <div class="form-group"><label>Event Date</label><input type="date" name="eventDate" value="${booking.eventDate}" required></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Event Type</label><input type="text" name="eventType" value="${booking.eventType}" required></div>
-      <div class="form-group"><label>Guest Count</label><input type="number" name="guestCount" value="${booking.guestCount}" min="1" required></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Special Requests</label><input type="text" name="specialRequests" value="${booking.specialRequests}"></div>
       <div class="form-group"><label>Status</label>
-        <select name="status"><option value="PENDING" ${booking.status == 'PENDING' ? 'selected' : ''}>Pending</option><option value="CONFIRMED" ${booking.status == 'CONFIRMED' ? 'selected' : ''}>Confirmed</option><option value="CANCELLED" ${booking.status == 'CANCELLED' ? 'selected' : ''}>Cancelled</option></select>
+        <select name="status">
+          <option value="PENDING" ${booking.status == 'PENDING' ? 'selected' : ''}>Pending</option>
+          <option value="CONFIRMED" ${booking.status == 'CONFIRMED' ? 'selected' : ''}>Confirmed</option>
+          <option value="CANCELLED" ${booking.status == 'CANCELLED' ? 'selected' : ''}>Cancelled</option>
+        </select>
       </div>
     </div>
     <div class="actions"><button type="submit" class="btn btn-primary">Save Changes</button><a href="/bookings" class="btn btn-secondary">Cancel</a></div>
