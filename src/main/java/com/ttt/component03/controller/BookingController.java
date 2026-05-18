@@ -58,3 +58,4 @@ public class BookingController {
     @GetMapping("/delete/{id}")
     public String deleteBooking(@PathVariable String id) { bookingRepository.deleteById(id); return "redirect:/bookings"; }
 }
+
