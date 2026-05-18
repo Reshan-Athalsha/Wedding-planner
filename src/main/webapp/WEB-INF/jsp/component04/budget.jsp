@@ -31,7 +31,7 @@
 </head><body>
 <nav class="nav">
   <span class="brand">💍 Tie The Tech</span>
-  <div style="display:flex;gap:16px"><a href="/planning">← Planning</a><a href="/planning/tasks">Tasks</a><a href="/planning/guests">Guests</a></div>
+  <div style="display:flex;gap:16px"><a href="/planning">← Planning</a><a href="/planning/checklist">Tasks</a><a href="/planning/guests">Guests</a></div>
 </nav>
 <div class="container">
   <h1>💰 Budget Tracker</h1>
