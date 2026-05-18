@@ -1,7 +1,7 @@
 <!-- ===== MINIMALIST FOOTER ===== -->
 <footer class="py-4 mt-5 text-center border-top border-light" style="background: transparent;">
     <div class="container text-muted small">
-        <p class="mb-0">© 2026 TTT. All Rights Reserved.</p>
+        <p class="mb-0">&copy; 2026 TTT. All Rights Reserved.</p>
     </div>
 </footer>
 
