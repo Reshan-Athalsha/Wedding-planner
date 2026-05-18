@@ -1,53 +1,52 @@
-﻿# Component 03 - Booking and Payment Management
+﻿# Component 05 - Reviews and Rating System
 
-**Developer:** Perera M.A.L.A - IT25XXXXXX
-**Branch:** Booking-and-Payment-Management-Perera.M.A.L.A
+**Developer:** Rupasinghe S.L.S - IT25XXXXXX
+**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
 ## What This Component Does
-Handles event bookings between couples and vendors,
-and processes payments. A confirmed payment automatically
-updates the linked booking status to CONFIRMED.
-Data stored in data/bookings.txt and data/payments.txt.
+Allows couples to leave star-rated reviews for vendors.
+Two review types are supported: VerifiedReview (from confirmed bookings)
+and PublicReview (open to all). Average ratings calculated per vendor.
+All data stored in data/reviews.txt.
 
 ## Routes
 | Action | Route |
 |---|---|
-| All Bookings | GET /bookings |
-| New Booking | GET/POST /bookings/new |
-| Edit Booking | GET /bookings/edit/{id} |
-| Delete Booking | GET /bookings/delete/{id} |
-| All Payments | GET /payments |
-| New Payment | GET/POST /payments/new |
-| Checkout | GET/POST /payments/checkout/{bookingId} |
+| All Reviews | GET /reviews |
+| Sort Reviews | GET /reviews?sort=rating |
+| Submit Review | GET /reviews/submit |
+| Post Review | POST /reviews/submit |
+| Edit Review | GET /reviews/edit/{id} |
+| Delete Review | GET /reviews/delete/{id} |
 
 ## My Files
 ```
-src/main/java/com/ttt/component03/
+src/main/java/com/ttt/component05/
   model/
-    Booking.java           (booking entity)
-    Payment.java           (payment entity)
+    Review.java           (abstract base class)
+    VerifiedReview.java   (extends Review - from confirmed bookings)
+    PublicReview.java     (extends Review - open reviews)
   repository/
-    BookingRepository.java (reads/writes data/bookings.txt)
-    PaymentRepository.java (reads/writes data/payments.txt)
+    ReviewRepository.java (reads/writes data/reviews.txt)
   controller/
-    BookingController.java
-    PaymentController.java
+    ReviewController.java (Spring MVC controller)
 
-src/main/webapp/WEB-INF/jsp/component03/
-  bookings.jsp, bookingForm.jsp, editBooking.jsp
-  payments.jsp, paymentForm.jsp, checkout.jsp
+src/main/webapp/WEB-INF/jsp/component05/
+  reviews.jsp, reviewForm.jsp, editReview.jsp
 ```
 
 ## OOP Principles
-- **Encapsulation**: All model fields private
-- **Information Hiding**: Repository hides file read/write logic
-- **Polymorphism**: Controllers handle multiple booking states uniformly
+- **Abstraction**: Review is abstract with abstract getReviewType()
+- **Inheritance**: VerifiedReview and PublicReview extend Review
+- **Polymorphism**: Repository saves/loads any Review subtype uniformly
+- **Encapsulation**: All fields private with getters/setters
+- **Information Hiding**: Star rating logic in Review, file I/O in repository
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Visit: http://localhost:8080/bookings
+# Visit: http://localhost:8080/reviews
 ```
