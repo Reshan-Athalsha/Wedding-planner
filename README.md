@@ -1,40 +1,30 @@
-﻿# Component 05 - Reviews and Rating System
+﻿# TTT - Tie The Tech Wedding Planning System
 
-**Developer:** Rupasinghe S.L.S - IT25XXXXXX
-**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
-**Module:** SE1020 OOP Group Project - Tie The Tech (TTT) Wedding Planning System - SLIIT
+**SE1020 OOP Group Project | Year 1 Semester 2 | University of SLIIT**
+
+A comprehensive, file-based Wedding Planning and Vendor Booking System built with Java and Spring Boot. No databases - pure java.io with strict OOP principles.
 
 ---
 
-## Overview
-Public and verified vendor reviews with 1-5 star ratings. VerifiedReview and PublicReview subclasses show inheritance at runtime.
+## Team and Components
 
-## Key Route
-http://localhost:8080/reviews
+| No | Component | Developer | Student ID | Branch |
+|---|---|---|---|---|
+| 01 | User Management | Athalsha R.R | IT25101874 | User-Management---Athalsha-R-R |
+| 02 | Vendor Management | Rathnayake R.M.G.C.B.B | IT25103963 | Vendor-Management-Rathnayake-R.M.G.C.B.B |
+| 03 | Booking and Payment | Perera M.A.L.A | IT25XXXXXX | Booking-and-Payment-Management-Perera.M.A.L.A |
+| 04 | Wedding Planning Tools | Ediriweera V.S | IT25XXXXXX | Wedding-Planning-tools-Ediriweera.V.S |
+| 05 | Reviews and Ratings | Rupasinghe S.L.S | IT25XXXXXX | Reviews-and-Rating-System-Rupasinghe.S.L.S |
+| 06 | Admin Dashboard | Bandara P.M.D.C | IT25XXXXXX | Admin-Dashboard-and-Analytics-Bandara.P.M.D.C |
 
-## OOP Principles
+---
 
-| Principle | Implementation |
-|---|---|
-| Abstraction | Abstract base class defines the domain model contract |
-| Inheritance | Concrete subclass(es) extend the abstract base class |
-| Encapsulation | All fields private with public getters/setters |
-| Polymorphism | Controller handles model subtypes via parent reference |
-| Information Hiding | Repository hides all file I/O from the controller layer |
-
-## Component Files
-```
-src/main/java/com/ttt/component05/
-  model/         Domain model class hierarchy (OOP)
-  repository/    File-based persistence (java.io, no database)
-  controller/    Spring MVC @Controller
-
-src/main/webapp/WEB-INF/jsp/component05/
-  JSP view templates
-```
+## Tech Stack
+- Java 17+ / Spring Boot 3.2.4 / JSP + JSTL / Maven
+- File-based persistence (data/*.txt) - No database
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Visit: http://localhost:8080/reviews
+# Open: http://localhost:8080
 ```
