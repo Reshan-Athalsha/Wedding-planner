@@ -27,7 +27,7 @@
   <h1>📋 Wedding Planning Tools</h1>
   <p class="subtitle">Manage your tasks, budget, and guest list all in one place</p>
   <div class="grid">
-    <a href="/planning/tasks" class="tool-card">
+    <a href="/planning/checklist" class="tool-card">
       <div class="tool-icon">✅</div>
       <div class="tool-name">Task Checklist</div>
       <div class="tool-desc">Track all your wedding to-dos with due dates and priorities</div>

@@ -24,7 +24,7 @@
     .empty{text-align:center;padding:40px;color:rgba(255,255,255,0.4)}
   </style>
 </head><body>
-<nav class="nav"><span class="brand">💍 Tie The Tech</span><div style="display:flex;gap:16px"><a href="/planning">← Planning</a><a href="/planning/tasks">Tasks</a><a href="/planning/budget">Budget</a></div></nav>
+<nav class="nav"><span class="brand">💍 Tie The Tech</span><div style="display:flex;gap:16px"><a href="/planning">← Planning</a><a href="/planning/checklist">Tasks</a><a href="/planning/budget">Budget</a></div></nav>
 <div class="container">
   <h1>👥 Guest List</h1>
   <div class="card">
