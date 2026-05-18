@@ -41,7 +41,7 @@
         <c:forEach var="r" items="${reviews}">
           <div class="card">
             <div class="review-header">
-              <div><div class="reviewer">${r.reviewerName}</div><div class="vendor-name">→ ${r.vendorName}</div></div>
+              <div><div class="reviewer">${r.userName}</div><div class="vendor-name">→ ${r.vendorId}</div></div>
               <a href="/reviews/delete/${r.reviewId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Delete?')">✕</a>
             </div>
             <div class="stars">
