@@ -57,4 +57,5 @@ src/main/webapp/WEB-INF/jsp/component06/
 ```bash
 mvn spring-boot:run
 # Visit: http://localhost:8080/admin
+
 ```
