@@ -19,6 +19,20 @@ public class PaymentController {
     @Autowired private PaymentRepository paymentRepository;
     @Autowired private BookingRepository bookingRepository;
 
+    @GetMapping("/new")
+    public String showNewPaymentForm(Model model) {
+        return "component03/paymentForm";
+    }
+
+    @PostMapping("/new")
+    public String saveNewPayment(@RequestParam String bookingId, @RequestParam double amount,
+                                 @RequestParam String paymentMethod, @RequestParam String paymentDate,
+                                 @RequestParam String status) {
+        String id = "PAY-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+        paymentRepository.save(new Payment(id, bookingId, amount, paymentMethod, status, paymentDate));
+        return "redirect:/payments";
+    }
+
     @GetMapping("/checkout/{bookingId}")
     public String showCheckout(@PathVariable String bookingId, Model model) {
         model.addAttribute("bookingId", bookingId);

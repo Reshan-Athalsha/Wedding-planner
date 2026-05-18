@@ -17,6 +17,15 @@ public class PlanningController {
     @Autowired private BudgetItemRepository budgetRepository;
     @Autowired private GuestRepository guestRepository;
 
+    @GetMapping
+    public String planningHome(Model model) {
+        model.addAttribute("taskCount", taskRepository.findAll().size());
+        model.addAttribute("guestCount", guestRepository.findAll().size());
+        double total = budgetRepository.findAll().stream().mapToDouble(BudgetItem::getEstimated).sum();
+        model.addAttribute("totalBudget", total);
+        return "component04/planning";
+    }
+
     @GetMapping("/checklist")
     public String viewChecklist(Model model) {
         List<Task> tasks = taskRepository.findAll();
