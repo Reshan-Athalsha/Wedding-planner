@@ -13,9 +13,8 @@ public abstract class Admin implements FileOperations {
         this.password = password; 
         this.email = email;
     }
-    
+    //from child class
     public abstract String getRoleName(); 
-    
     public abstract String getPermissions();
     
     @Override 
