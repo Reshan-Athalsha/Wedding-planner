@@ -27,7 +27,7 @@ public class ReviewController {
         return "component05/reviews";
     }
 
-    @GetMapping("/new")
+    @GetMapping({"/new", "/submit"})
     public String showReviewForm() { return "component05/reviewForm"; }
 
     @PostMapping("/new")
@@ -39,6 +39,18 @@ public class ReviewController {
         String name = session.getAttribute("userName") != null ? (String)session.getAttribute("userName") : userName;
         Review review = "VERIFIED".equals(reviewType) ? new VerifiedReview(id, vendorId, name, rating, comment, date)
                                                       : new PublicReview(id, vendorId, name, rating, comment, date);
+        reviewRepository.save(review);
+        return "redirect:/reviews";
+    }
+
+    @PostMapping("/submit")
+    public String submitReviewForm(@RequestParam String reviewerName, @RequestParam String vendorName,
+                                   @RequestParam int rating, @RequestParam String comment,
+                                   @RequestParam(defaultValue="PUBLIC") String reviewType) {
+        String id   = "REV-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+        String date = LocalDate.now().toString();
+        Review review = "VERIFIED".equals(reviewType) ? new VerifiedReview(id, vendorName, reviewerName, rating, comment, date)
+                                                      : new PublicReview(id, vendorName, reviewerName, rating, comment, date);
         reviewRepository.save(review);
         return "redirect:/reviews";
     }
