@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.model;
+package com.ttt.component06.model;
 /** COMPONENT 06 - ModeratorAdmin | OOP: INHERITANCE, POLYMORPHISM */
 public class ModeratorAdmin extends Admin {
     public ModeratorAdmin() {}

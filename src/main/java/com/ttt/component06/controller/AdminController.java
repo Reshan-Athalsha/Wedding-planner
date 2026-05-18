@@ -1,4 +1,4 @@
-﻿package com.ttt.component06.controller;
+package com.ttt.component06.controller;
 
 import com.ttt.component06.model.*;
 import com.ttt.component06.repository.*;
