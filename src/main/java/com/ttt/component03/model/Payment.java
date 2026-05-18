@@ -22,3 +22,4 @@ public class Payment implements FileOperations {
     public String getStatus()        { return status; }        public void setStatus(String v)        { this.status=v; }
     public String getPaymentDate()   { return paymentDate; }   public void setPaymentDate(String v)   { this.paymentDate=v; }
 }
+
