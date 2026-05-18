@@ -1,6 +1,6 @@
 ﻿# Component 03 - Booking and Payment
 
-**Developer:** Perera M.A.L.A - IT25XXXXXX
+**Developer:** Perera M.A.L.A - IT25100125
 **Branch:** Booking-and-Payment-Management-Perera.M.A.L.A
 **Module:** SE1020 OOP Group Project - Tie The Tech (TTT) - SLIIT
 
