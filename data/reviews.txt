@@ -1,2 +1,0 @@
-REV-7E5EE|Test Vendor|Test User|5|This is a test review edited|2026-05-18|PUBLIC
-REV-5CBC4|Floral Dreams|Jane Doe|5|Stunning arrangements, highly recommend!|2026-05-18|VERIFIED

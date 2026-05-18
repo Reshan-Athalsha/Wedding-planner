@@ -61,80 +61,80 @@
 
             <!-- Component 2: Vendor Management -->
             <div class="col-md-4">
-                <div class="premium-card">
+                <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #f953c6, #b91d73);"></div>
                     <div class="p-4">
                         <div class="card-icon" style="background: rgba(249,83,198,0.15);">
                             <i class="bi bi-shop" style="color:#f953c6; font-size:1.8rem"></i>
                         </div>
-                        <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
+                        <span class="tag-crud mb-2 d-inline-block text-muted">DISABLED (COMPONENT ISOLATION)</span>
                         <h5>Component 2 — Vendor Management</h5>
                         <p>Register venues, photographers &amp; caterers. Filter by category. OOP: Abstraction (calculatePricing) · Inheritance (VenueVendor, PhotographyVendor, CateringVendor).</p>
-                        <a href="/vendors" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#f953c6,#b91d73)">Browse Vendors →</a>
+                        <button class="btn btn-card text-white mt-3 w-100" style="background:linear-gradient(135deg,#f953c6,#b91d73); opacity: 0.5; cursor: not-allowed;" disabled>Browse Vendors (Disabled)</button>
                     </div>
                 </div>
             </div>
 
             <!-- Component 3: Booking & Payment -->
             <div class="col-md-4">
-                <div class="premium-card">
+                <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #f0c040, #d4a017);"></div>
                     <div class="p-4">
                         <div class="card-icon" style="background: rgba(240,192,64,0.15);">
                             <i class="bi bi-calendar-check" style="color:#f0c040; font-size:1.8rem"></i>
                         </div>
-                        <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
+                        <span class="tag-crud mb-2 d-inline-block text-muted">DISABLED (COMPONENT ISOLATION)</span>
                         <h5>Component 3 — Booking &amp; Payment</h5>
                         <p>Send booking requests, track status (PENDING → CONFIRMED), process payments. Confirming payment auto-updates booking status. OOP: Encapsulation · Abstraction.</p>
-                        <a href="/bookings" class="btn btn-card mt-3" style="background:linear-gradient(135deg,#f0c040,#d4a017);color:#1a1a2e;">View Bookings →</a>
+                        <button class="btn btn-card mt-3 w-100" style="background:linear-gradient(135deg,#f0c040,#d4a017);color:#1a1a2e; opacity: 0.5; cursor: not-allowed;" disabled>View Bookings (Disabled)</button>
                     </div>
                 </div>
             </div>
 
             <!-- Component 4: Wedding Planning Tools -->
             <div class="col-md-4">
-                <div class="premium-card">
+                <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #11998e, #38ef7d);"></div>
                     <div class="p-4">
                         <div class="card-icon" style="background: rgba(17,153,142,0.15);">
                             <i class="bi bi-card-checklist" style="color:#11998e; font-size:1.8rem"></i>
                         </div>
-                        <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
+                        <span class="tag-crud mb-2 d-inline-block text-muted">DISABLED (COMPONENT ISOLATION)</span>
                         <h5>Component 4 — Wedding Planning Tools</h5>
                         <p>Interactive checklist with progress tracking, budget tracker (estimated vs actual), and guest list with RSVP management. OOP: Encapsulation · Association.</p>
-                        <a href="/planning/checklist" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#11998e,#38ef7d);color:#1a1a2e!important;">Open Planner →</a>
+                        <button class="btn btn-card text-white mt-3 w-100" style="background:linear-gradient(135deg,#11998e,#38ef7d);color:#1a1a2e!important; opacity: 0.5; cursor: not-allowed;" disabled>Open Planner (Disabled)</button>
                     </div>
                 </div>
             </div>
 
             <!-- Component 5: Reviews & Ratings -->
             <div class="col-md-4">
-                <div class="premium-card">
+                <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #f7971e, #ffd200);"></div>
                     <div class="p-4">
                         <div class="card-icon" style="background: rgba(247,151,30,0.15);">
                             <i class="bi bi-star" style="color:#f7971e; font-size:1.8rem"></i>
                         </div>
-                        <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
+                        <span class="tag-crud mb-2 d-inline-block text-muted">DISABLED (COMPONENT ISOLATION)</span>
                         <h5>Component 5 — Reviews &amp; Ratings</h5>
                         <p>Rate vendors 1–5 stars, write reviews, sort by rating or date. Two review types: Verified (editable) &amp; Public (final). OOP: Inheritance · Abstraction (canEdit()).</p>
-                        <a href="/reviews" class="btn btn-card mt-3" style="background:linear-gradient(135deg,#f7971e,#ffd200);color:#1a1a2e;">View Reviews →</a>
+                        <button class="btn btn-card mt-3 w-100" style="background:linear-gradient(135deg,#f7971e,#ffd200);color:#1a1a2e; opacity: 0.5; cursor: not-allowed;" disabled>View Reviews (Disabled)</button>
                     </div>
                 </div>
             </div>
 
             <!-- Component 6: Admin Dashboard -->
             <div class="col-md-4">
-                <div class="premium-card">
+                <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #1a1a2e, #4776E6);"></div>
                     <div class="p-4">
                         <div class="card-icon" style="background: rgba(26,26,46,0.15);">
                             <i class="bi bi-bar-chart-fill" style="color:#4776E6; font-size:1.8rem"></i>
                         </div>
-                        <span class="tag-crud mb-2 d-inline-block">READ · UPDATE · DELETE</span>
+                        <span class="tag-crud mb-2 d-inline-block text-muted">DISABLED (COMPONENT ISOLATION)</span>
                         <h5>Component 6 — Admin Dashboard</h5>
                         <p>Platform-wide analytics: total users, vendors, bookings, revenue. Manage and delete users, vendors &amp; reviews. Cross-component data aggregation. OOP: Encapsulation.</p>
-                        <a href="/admin" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#1a1a2e,#4776E6)">Admin Panel →</a>
+                        <button class="btn btn-card text-white mt-3 w-100" style="background:linear-gradient(135deg,#1a1a2e,#4776E6); opacity: 0.5; cursor: not-allowed;" disabled>Admin Panel (Disabled)</button>
                     </div>
                 </div>
             </div>
