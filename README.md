@@ -1,52 +1,52 @@
-﻿# Component 05 - Reviews and Rating System
+﻿# Component 02 - Vendor Management
 
-**Developer:** Rupasinghe S.L.S - IT25XXXXXX
-**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
+**Developer:** Rathnayake R.M.G.C.B.B - IT25103963
+**Branch:** Vendor-Management-Rathnayake-R.M.G.C.B.B
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
 ## What This Component Does
-Allows couples to leave star-rated reviews for vendors.
-Two review types are supported: VerifiedReview (from confirmed bookings)
-and PublicReview (open to all). Average ratings calculated per vendor.
-All data stored in data/reviews.txt.
+Manages wedding service vendors across three specialised categories:
+Venue, Catering, and Photography.
+Vendors can be searched and filtered. All data in data/vendors.txt.
 
 ## Routes
 | Action | Route |
 |---|---|
-| All Reviews | GET /reviews |
-| Sort Reviews | GET /reviews?sort=rating |
-| Submit Review | GET /reviews/submit |
-| Post Review | POST /reviews/submit |
-| Edit Review | GET /reviews/edit/{id} |
-| Delete Review | GET /reviews/delete/{id} |
+| All Vendors | GET /vendors |
+| Filter by Category | GET /vendors?category=VENUE |
+| Add Vendor | GET/POST /vendors/new |
+| View Detail | GET /vendors/{id} |
+| Edit Vendor | GET /vendors/edit/{id} |
+| Delete Vendor | GET /vendors/delete/{id} |
 
 ## My Files
 ```
-src/main/java/com/ttt/component05/
+src/main/java/com/ttt/component02/
   model/
-    Review.java           (abstract base class)
-    VerifiedReview.java   (extends Review - from confirmed bookings)
-    PublicReview.java     (extends Review - open reviews)
+    Vendor.java               (abstract base class)
+    VenueVendor.java          (extends Vendor)
+    CateringVendor.java       (extends Vendor)
+    PhotographyVendor.java    (extends Vendor)
   repository/
-    ReviewRepository.java (reads/writes data/reviews.txt)
+    VendorRepository.java     (reads/writes data/vendors.txt)
   controller/
-    ReviewController.java (Spring MVC controller)
+    VendorController.java     (Spring MVC controller)
 
-src/main/webapp/WEB-INF/jsp/component05/
-  reviews.jsp, reviewForm.jsp, editReview.jsp
+src/main/webapp/WEB-INF/jsp/component02/
+  vendors.jsp, vendorForm.jsp, vendorDetail.jsp, editVendor.jsp
 ```
 
 ## OOP Principles
-- **Abstraction**: Review is abstract with abstract getReviewType()
-- **Inheritance**: VerifiedReview and PublicReview extend Review
-- **Polymorphism**: Repository saves/loads any Review subtype uniformly
+- **Abstraction**: Vendor is abstract with getCategory()
+- **Inheritance**: 3 subclasses extend Vendor
+- **Polymorphism**: Switch expression creates correct subtype at runtime
 - **Encapsulation**: All fields private with getters/setters
-- **Information Hiding**: Star rating logic in Review, file I/O in repository
+- **Information Hiding**: File format hidden in VendorRepository
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Visit: http://localhost:8080/reviews
+# Visit: http://localhost:8080/vendors
 ```
