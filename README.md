@@ -1,30 +1,53 @@
-﻿# TTT - Tie The Tech Wedding Planning System
+﻿# Component 03 - Booking and Payment Management
 
-**SE1020 OOP Group Project | Year 1 Semester 2 | University of SLIIT**
-
-A comprehensive, file-based Wedding Planning and Vendor Booking System built with Java and Spring Boot. No databases - pure java.io with strict OOP principles.
-
----
-
-## Team and Components
-
-| No | Component | Developer | Student ID | Branch |
-|---|---|---|---|---|
-| 01 | User Management | Athalsha R.R | IT25101874 | User-Management---Athalsha-R-R |
-| 02 | Vendor Management | Rathnayake R.M.G.C.B.B | IT25103963 | Vendor-Management-Rathnayake-R.M.G.C.B.B |
-| 03 | Booking and Payment | Perera M.A.L.A | IT25XXXXXX | Booking-and-Payment-Management-Perera.M.A.L.A |
-| 04 | Wedding Planning Tools | Ediriweera V.S | IT25XXXXXX | Wedding-Planning-tools-Ediriweera.V.S |
-| 05 | Reviews and Ratings | Rupasinghe S.L.S | IT25XXXXXX | Reviews-and-Rating-System-Rupasinghe.S.L.S |
-| 06 | Admin Dashboard | Bandara P.M.D.C | IT25XXXXXX | Admin-Dashboard-and-Analytics-Bandara.P.M.D.C |
+**Developer:** Perera M.A.L.A - IT25XXXXXX
+**Branch:** Booking-and-Payment-Management-Perera.M.A.L.A
+**Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
-## Tech Stack
-- Java 17+ / Spring Boot 3.2.4 / JSP + JSTL / Maven
-- File-based persistence (data/*.txt) - No database
+## What This Component Does
+Handles event bookings between couples and vendors,
+and processes payments. A confirmed payment automatically
+updates the linked booking status to CONFIRMED.
+Data stored in data/bookings.txt and data/payments.txt.
+
+## Routes
+| Action | Route |
+|---|---|
+| All Bookings | GET /bookings |
+| New Booking | GET/POST /bookings/new |
+| Edit Booking | GET /bookings/edit/{id} |
+| Delete Booking | GET /bookings/delete/{id} |
+| All Payments | GET /payments |
+| New Payment | GET/POST /payments/new |
+| Checkout | GET/POST /payments/checkout/{bookingId} |
+
+## My Files
+```
+src/main/java/com/ttt/component03/
+  model/
+    Booking.java           (booking entity)
+    Payment.java           (payment entity)
+  repository/
+    BookingRepository.java (reads/writes data/bookings.txt)
+    PaymentRepository.java (reads/writes data/payments.txt)
+  controller/
+    BookingController.java
+    PaymentController.java
+
+src/main/webapp/WEB-INF/jsp/component03/
+  bookings.jsp, bookingForm.jsp, editBooking.jsp
+  payments.jsp, paymentForm.jsp, checkout.jsp
+```
+
+## OOP Principles
+- **Encapsulation**: All model fields private
+- **Information Hiding**: Repository hides file read/write logic
+- **Polymorphism**: Controllers handle multiple booking states uniformly
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Open: http://localhost:8080
+# Visit: http://localhost:8080/bookings
 ```
