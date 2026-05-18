@@ -1,52 +1,53 @@
-﻿# Component 05 - Reviews and Rating System
+﻿# Component 04 - Wedding Planning Tools
 
-**Developer:** Rupasinghe S.L.S - IT25XXXXXX
-**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
+**Developer:** Ediriweera V.S - IT25XXXXXX
+**Branch:** Wedding-Planning-tools-Ediriweera.V.S
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
 ## What This Component Does
-Allows couples to leave star-rated reviews for vendors.
-Two review types are supported: VerifiedReview (from confirmed bookings)
-and PublicReview (open to all). Average ratings calculated per vendor.
-All data stored in data/reviews.txt.
+Three integrated planning tools in one component:
+1. Task Checklist - track wedding preparation tasks
+2. Budget Tracker - monitor estimated vs actual spending
+3. Guest List Manager - manage RSVPs and table assignments
+Each has its own repository and data file.
 
 ## Routes
 | Action | Route |
 |---|---|
-| All Reviews | GET /reviews |
-| Sort Reviews | GET /reviews?sort=rating |
-| Submit Review | GET /reviews/submit |
-| Post Review | POST /reviews/submit |
-| Edit Review | GET /reviews/edit/{id} |
-| Delete Review | GET /reviews/delete/{id} |
+| Planning Overview | GET /planning |
+| Task Checklist | GET /planning/checklist |
+| Add Task | POST /planning/tasks/add |
+| Complete Task | GET /planning/tasks/complete/{id} |
+| Budget Tracker | GET /planning/budget |
+| Add Budget Item | POST /planning/budget/add |
+| Guest List | GET /planning/guests |
+| Add Guest | POST /planning/guests/add |
 
 ## My Files
 ```
-src/main/java/com/ttt/component05/
+src/main/java/com/ttt/component04/
   model/
-    Review.java           (abstract base class)
-    VerifiedReview.java   (extends Review - from confirmed bookings)
-    PublicReview.java     (extends Review - open reviews)
+    Task.java, BudgetItem.java, Guest.java
   repository/
-    ReviewRepository.java (reads/writes data/reviews.txt)
+    TaskRepository.java        (data/tasks.txt)
+    BudgetItemRepository.java  (data/budget.txt)
+    GuestRepository.java       (data/guests.txt)
   controller/
-    ReviewController.java (Spring MVC controller)
+    PlanningController.java    (handles all 3 tools)
 
-src/main/webapp/WEB-INF/jsp/component05/
-  reviews.jsp, reviewForm.jsp, editReview.jsp
+src/main/webapp/WEB-INF/jsp/component04/
+  planning.jsp, checklist.jsp, budget.jsp, guestList.jsp
 ```
 
 ## OOP Principles
-- **Abstraction**: Review is abstract with abstract getReviewType()
-- **Inheritance**: VerifiedReview and PublicReview extend Review
-- **Polymorphism**: Repository saves/loads any Review subtype uniformly
-- **Encapsulation**: All fields private with getters/setters
-- **Information Hiding**: Star rating logic in Review, file I/O in repository
+- **Abstraction**: Each model represents a real planning domain object
+- **Encapsulation**: Private fields, public accessors
+- **Information Hiding**: Three separate repositories hide file I/O
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Visit: http://localhost:8080/reviews
+# Visit: http://localhost:8080/planning
 ```
