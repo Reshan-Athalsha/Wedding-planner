@@ -24,22 +24,12 @@
   <h2>📅 New Booking</h2>
   <form method="post" action="/bookings/new">
     <div class="form-row">
+      <div class="form-group"><label>Client Name</label><input type="text" name="clientName" id="clientName" placeholder="Couple's name" required></div>
       <div class="form-group"><label>Vendor Name</label><input type="text" name="vendorName" id="vendorName" placeholder="Vendor business name" required></div>
+    </div>
+    <div class="form-row">
       <div class="form-group"><label>Event Date</label><input type="date" name="eventDate" id="eventDate" required></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Event Type</label>
-        <select name="eventType" id="eventType" required>
-          <option value="">Select...</option><option>Wedding Ceremony</option><option>Reception</option><option>Pre-wedding Shoot</option><option>Engagement</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Guest Count</label><input type="number" name="guestCount" id="guestCount" min="1" placeholder="Number of guests" required></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Special Requests</label><input type="text" name="specialRequests" id="specialRequests" placeholder="Any special requirements"></div>
-      <div class="form-group"><label>Status</label>
-        <select name="status" id="status"><option value="PENDING">Pending</option><option value="CONFIRMED">Confirmed</option></select>
-      </div>
+      <div class="form-group"></div>
     </div>
     <div class="actions"><button type="submit" class="btn btn-primary">Create Booking</button><a href="/bookings" class="btn btn-secondary">Cancel</a></div>
   </form>

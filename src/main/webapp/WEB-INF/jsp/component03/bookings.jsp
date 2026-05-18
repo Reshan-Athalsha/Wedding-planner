@@ -36,12 +36,12 @@
     <c:when test="${empty bookings}"><div class="empty"><h3>No bookings yet</h3><p>Create your first booking</p></div></c:when>
     <c:otherwise>
       <table>
-        <thead><tr><th>Booking ID</th><th>Vendor</th><th>Date</th><th>Event Type</th><th>Guests</th><th>Status</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Booking ID</th><th>Client</th><th>Vendor</th><th>Event Date</th><th>Created On</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody>
           <c:forEach var="b" items="${bookings}">
             <tr>
-              <td>${b.bookingId}</td><td>${b.vendorName}</td><td>${b.eventDate}</td>
-              <td>${b.eventType}</td><td>${b.guestCount}</td>
+              <td>${b.bookingId}</td><td>${b.clientName}</td><td>${b.vendorName}</td>
+              <td>${b.eventDate}</td><td>${b.createdDate}</td>
               <td><span class="badge badge-${b.status.toLowerCase()}">${b.status}</span></td>
               <td>
                 <a href="/bookings/edit/${b.bookingId}" class="btn btn-primary" style="font-size:12px;padding:6px 14px">Edit</a>
