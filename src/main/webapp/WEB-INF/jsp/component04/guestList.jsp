@@ -15,7 +15,9 @@
     input,select{width:100%;padding:11px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:14px;font-family:'Outfit',sans-serif;outline:none}
     input:focus,select:focus{border-color:#a78bfa}select option{background:#1a0533}
     .btn{padding:11px 20px;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:opacity 0.2s;text-decoration:none;display:inline-block}
-    .btn-primary{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;width:100%}.btn-danger{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5}
+    .btn-primary{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;width:100%}
+    .btn-secondary{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);color:#fff}
+    .btn-danger{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5}
     table{width:100%;border-collapse:collapse}
     th{text-align:left;padding:10px;color:rgba(255,255,255,0.5);font-size:12px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid rgba(255,255,255,0.08)}
     td{padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:14px}
@@ -31,12 +33,15 @@
     <c:choose>
       <c:when test="${empty guests}"><div class="empty"><p>No guests added yet</p></div></c:when>
       <c:otherwise>
-        <table><thead><tr><th>Name</th><th>Email</th><th>Table</th><th>Plus One</th><th>RSVP</th><th></th></tr></thead>
+        <table><thead><tr><th>Name</th><th>Email</th><th>Table</th><th>Plus One</th><th>RSVP</th><th>Actions</th></tr></thead>
           <tbody><c:forEach var="g" items="${guests}">
             <tr>
               <td>${g.name}</td><td>${g.email}</td><td>${g.tableNumber}</td><td>${g.plusOne ? 'Yes' : 'No'}</td>
               <td><span class="badge badge-${g.rsvpStatus.toLowerCase()}">${g.rsvpStatus}</span></td>
-              <td><a href="/planning/guests/delete/${g.guestId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Remove guest?')">✕</a></td>
+              <td style="display:flex;gap:6px;flex-wrap:wrap">
+                <a href="/planning/guests/edit/${g.guestId}" class="btn btn-secondary" style="font-size:12px;padding:5px 10px">Edit</a>
+                <a href="/planning/guests/delete/${g.guestId}" class="btn btn-danger" style="font-size:12px;padding:5px 10px" onclick="return confirm('Remove guest?')">✕</a>
+              </td>
             </tr>
           </c:forEach></tbody>
         </table>
@@ -44,16 +49,42 @@
     </c:choose>
   </div>
   <div class="card">
-    <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Add Guest</h2>
-    <form method="post" action="/planning/guests/add">
-      <div class="form-group"><label>Name</label><input type="text" name="name" id="guestName" placeholder="Guest full name" required></div>
-      <div class="form-group"><label>Email</label><input type="email" name="email" id="guestEmail" placeholder="guest@email.com"></div>
-      <div class="form-group"><label>Table Number</label><input type="number" name="tableNumber" id="tableNumber" min="0" value="0" placeholder="0"></div>
-      <div class="form-group" style="display:flex;align-items:center;gap:10px">
-        <input type="checkbox" name="plusOne" id="plusOne" value="true" style="width:auto">
-        <label for="plusOne" style="text-transform:none;letter-spacing:0;font-size:14px">Plus One (+1)</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Add Guest</button>
-    </form>
+    <c:choose>
+      <c:when test="${not empty editingGuest}">
+        <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Edit Guest</h2>
+        <form method="post" action="/planning/guests/update">
+          <input type="hidden" name="guestId" value="${editingGuest.guestId}">
+          <div class="form-group"><label>Name</label><input type="text" name="name" id="guestName" value="${editingGuest.name}" placeholder="Guest full name" required></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" id="guestEmail" value="${editingGuest.email}" placeholder="guest@email.com"></div>
+          <div class="form-group"><label>Table Number</label><input type="number" name="tableNumber" id="tableNumber" min="0" value="${editingGuest.tableNumber}" placeholder="0"></div>
+          <div class="form-group"><label>RSVP</label>
+            <select name="rsvpStatus" id="rsvpStatus">
+              <option value="PENDING" ${editingGuest.rsvpStatus == 'PENDING' ? 'selected' : ''}>Pending</option>
+              <option value="ATTENDING" ${editingGuest.rsvpStatus == 'ATTENDING' ? 'selected' : ''}>Attending</option>
+              <option value="DECLINED" ${editingGuest.rsvpStatus == 'DECLINED' ? 'selected' : ''}>Declined</option>
+            </select>
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:10px">
+            <input type="checkbox" name="plusOne" id="plusOne" value="true" style="width:auto" <c:if test="${editingGuest.plusOne}">checked</c:if>>
+            <label for="plusOne" style="text-transform:none;letter-spacing:0;font-size:14px">Plus One (+1)</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <a href="/planning/guests" class="btn btn-secondary" style="display:inline-block;margin-top:12px;width:auto">Cancel</a>
+        </form>
+      </c:when>
+      <c:otherwise>
+        <h2 style="font-size:18px;margin-bottom:20px;font-weight:700">Add Guest</h2>
+        <form method="post" action="/planning/guests/add">
+          <div class="form-group"><label>Name</label><input type="text" name="name" id="guestName" placeholder="Guest full name" required></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" id="guestEmail" placeholder="guest@email.com"></div>
+          <div class="form-group"><label>Table Number</label><input type="number" name="tableNumber" id="tableNumber" min="0" value="0" placeholder="0"></div>
+          <div class="form-group" style="display:flex;align-items:center;gap:10px">
+            <input type="checkbox" name="plusOne" id="plusOne" value="true" style="width:auto">
+            <label for="plusOne" style="text-transform:none;letter-spacing:0;font-size:14px">Plus One (+1)</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Guest</button>
+        </form>
+      </c:otherwise>
+    </c:choose>
   </div>
 </div></body></html>
