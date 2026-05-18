@@ -147,8 +147,8 @@
                     <p>OOP Principles</p>
                 </div>
                 <div class="col-md-3 col-6 stat-item">
-                    <h3>MySQL</h3>
-                    <p>TTT_db Database</p>
+                    <h3>File I/O</h3>
+                    <p>Plain Text Databases</p>
                 </div>
             </div>
         </div>
@@ -275,7 +275,7 @@
 <footer class="py-4 mt-4">
     <div class="container text-center">
         <p class="mb-0">© 2026 <span class="gold">Tie The Tech (TTT)</span> — SE1020 Object Oriented Programming Project</p>
-        <p class="mt-1 mb-0">Built with Spring Boot · JPA · MySQL · Bootstrap 5</p>
+        <p class="mt-1 mb-0">Built with Spring Boot · Java File Persistence (`java.io`) · Bootstrap 5</p>
     </div>
 </footer>
 

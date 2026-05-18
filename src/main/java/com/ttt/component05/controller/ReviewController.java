@@ -54,8 +54,16 @@ public class ReviewController {
     // UPDATE — Show edit form pre-filled with existing review data
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable String id, Model model) {
-        reviewRepository.findById(id).ifPresent(r -> model.addAttribute("review", r));
-        return "component05/editReview";
+        reviewRepository.findById(id).ifPresent(r -> {
+            if (r.canEdit()) {
+                model.addAttribute("review", r);
+            }
+        });
+        // If not found or not editable, redirect back with error status
+        if (model.containsAttribute("review")) {
+            return "component05/editReview";
+        }
+        return "redirect:/reviews?error=unauthorized";
     }
 
     // UPDATE — Process edit form
@@ -67,10 +75,13 @@ public class ReviewController {
                                @RequestParam String comment,
                                @RequestParam String reviewType) {
         reviewRepository.findById(reviewId).ifPresent(r -> {
-            Review updated = "VERIFIED".equals(reviewType)
-                    ? new VerifiedReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate())
-                    : new PublicReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate());
-            reviewRepository.save(updated);
+            // Enforce the canEdit() business rule (Abstraction)
+            if (r.canEdit()) {
+                Review updated = "VERIFIED".equals(reviewType)
+                        ? new VerifiedReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate())
+                        : new PublicReview(reviewId, vendorName, reviewerName, rating, comment, r.getReviewDate());
+                reviewRepository.save(updated);
+            }
         });
         return "redirect:/reviews";
     }

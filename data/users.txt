@@ -1,1 +1,2 @@
-USR-B5BAA|Reshan|reshan@gmail.com|Reshan@1234|COUPLE||0.0|0|
+USR-04616|reshan|reshan@gmail.com|Reshan@1234|COUPLE||0.0|0|
+USR-DD568|Athalsha User|athalsha@test.com|password123|COUPLE|2026-12-31|25000.0|150|Vintage Neon
