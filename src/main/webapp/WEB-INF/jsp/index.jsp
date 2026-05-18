@@ -15,8 +15,20 @@
                 </div>
             </div>
             <div class="col-lg-5 text-center mt-5 mt-lg-0">
-                <div class="hero-ring"><i class="bi bi-gem text-warning"></i></div>
-                <p class="text-white-50 mt-3 small">Tie The Tech — Making Weddings Happen</p>
+                <div id="heroCarousel" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(255,255,255,0.1);">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="4000">
+                            <img src="/Dashboard_pic/Wedding-Planner.jpg" class="d-block w-100" alt="Dashboard Preview 1" style="object-fit: cover; height: 350px;">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <img src="/Dashboard_pic/The-Incredible-Benefits-of-Hiring-a-Wedding-Planner.jpg" class="d-block w-100" alt="Dashboard Preview 2" style="object-fit: cover; height: 350px;">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <img src="/Dashboard_pic/wedding-coordinator-planner-recirc-getty-09-24-4ebd5a5ffa5d418da73e1f5bbac7f681.jpg" class="d-block w-100" alt="Dashboard Preview 3" style="object-fit: cover; height: 350px;">
+                        </div>
+                    </div>
+                </div>
+                <p class="text-white-50 mt-4 small fw-medium letter-spacing-1 text-uppercase">Tie The Tech — Making Weddings Happen</p>
             </div>
         </div>
     </div>
