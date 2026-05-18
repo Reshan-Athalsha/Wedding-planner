@@ -1,37 +1,40 @@
-﻿# Component 06 - Admin Dashboard and Analytics
+﻿# Component 05 - Reviews and Rating System
 
-**Developer:** Bandara P.M.D.C - IT25XXXXXX
-**Branch:** Admin-Dashboard-and-Analytics-Bandara.P.M.D.C
-**Module:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
+**Developer:** Rupasinghe S.L.S - IT25XXXXXX
+**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
+**Module:** SE1020 OOP Group Project - Tie The Tech (TTT) Wedding Planning System - SLIIT
 
 ---
 
 ## Overview
-System-wide dashboard providing analytics across all 6 components. Shows total users, vendors, bookings, payments, reviews and planning tasks. Aggregates data from all repositories.
+Public and verified vendor reviews with 1-5 star ratings. VerifiedReview and PublicReview subclasses show inheritance at runtime.
 
-## Key Routes
-- Admin Dashboard: http://localhost:8080/admin
-- OOP Overview: http://localhost:8080/oop
+## Key Route
+http://localhost:8080/reviews
 
 ## OOP Principles
-| Principle | How Applied |
+
+| Principle | Implementation |
 |---|---|
-| Abstraction | AdminController aggregates via repository abstractions |
-| Encapsulation | All component data hidden behind repository interfaces |
-| Polymorphism | Dashboard renders any Review/Vendor/Booking subtype |
-| Information Hiding | Controller never reads files directly |
+| Abstraction | Abstract base class defines the domain model contract |
+| Inheritance | Concrete subclass(es) extend the abstract base class |
+| Encapsulation | All fields private with public getters/setters |
+| Polymorphism | Controller handles model subtypes via parent reference |
+| Information Hiding | Repository hides all file I/O from the controller layer |
 
-## My Files
+## Component Files
 ```
-com/ttt/component06/
-  controller/  AdminController.java
+src/main/java/com/ttt/component05/
+  model/         Domain model class hierarchy (OOP)
+  repository/    File-based persistence (java.io, no database)
+  controller/    Spring MVC @Controller
 
-src/main/webapp/WEB-INF/jsp/component06/
-  adminDashboard.jsp
+src/main/webapp/WEB-INF/jsp/component05/
+  JSP view templates
 ```
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Open: http://localhost:8080/admin
+# Visit: http://localhost:8080/reviews
 ```
