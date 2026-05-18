@@ -4,30 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tie The Tech — Wedding Planner</title>
+    <title>Tie The Tech — Next-Gen Wedding Coordination Suite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Inter', sans-serif; }
-        body { background: #fdf9f0; }
+        * { font-family: 'Outfit', sans-serif; }
+        body { background: #fafafd; color: #1a1a2e; }
 
         /* ---- NAVBAR ---- */
         .ttt-navbar {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 14px 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #120b24 0%, #0d1220 100%);
+            padding: 16px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .ttt-navbar .navbar-brand { color: #f0c040 !important; font-weight: 800; font-size: 1.3rem; letter-spacing: 0.5px; }
+        .ttt-navbar .navbar-brand { color: #f0c040 !important; font-weight: 800; font-size: 1.4rem; letter-spacing: 0.5px; }
         .ttt-navbar .nav-link { color: rgba(255,255,255,0.75) !important; font-weight: 500; transition: color 0.2s; }
         .ttt-navbar .nav-link:hover { color: #f0c040 !important; }
-        .ttt-navbar .btn-nav-login { background: #f0c040; color: #1a1a2e; font-weight: 700; border: none; border-radius: 20px; padding: 6px 20px; }
-        .ttt-navbar .btn-nav-login:hover { background: #d4a017; color: #1a1a2e; }
+        .ttt-navbar .btn-nav-login { background: #f0c040; color: #1a1a2e; font-weight: 700; border: none; border-radius: 20px; padding: 6px 22px; transition: all 0.2s ease; }
+        .ttt-navbar .btn-nav-login:hover { background: #d4a017; color: #1a1a2e; transform: translateY(-1px); }
 
         /* ---- HERO ---- */
         .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-            padding: 100px 0 80px;
+            background: linear-gradient(135deg, #120b24 0%, #0c1220 60%, #091726 100%);
+            padding: 130px 0 110px;
             position: relative;
             overflow: hidden;
         }
@@ -35,47 +36,48 @@
             content: '';
             position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(240,192,64,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 30%, rgba(240,192,64,0.05) 0%, transparent 40%);
+            background: radial-gradient(circle at 30% 50%, rgba(240,192,64,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(240,192,64,0.04) 0%, transparent 40%);
         }
-        .hero h1 { color: #f0c040; font-weight: 800; font-size: 3.2rem; line-height: 1.2; }
-        .hero p { color: rgba(255,255,255,0.7); font-size: 1.1rem; }
-        .hero .badge-tag { background: rgba(240,192,64,0.15); color: #f0c040; border: 1px solid rgba(240,192,64,0.3); border-radius: 20px; padding: 6px 16px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 20px; }
-        .btn-hero { background: linear-gradient(135deg, #f0c040, #d4a017); color: #1a1a2e; font-weight: 700; border: none; border-radius: 30px; padding: 14px 38px; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .hero h1 { color: #f0c040; font-weight: 800; font-size: 3.5rem; line-height: 1.25; letter-spacing: -0.5px; }
+        .hero p { color: rgba(255,255,255,0.75); font-size: 1.15rem; line-height: 1.7; max-width: 620px; }
+        .hero .badge-tag { background: rgba(240,192,64,0.12); color: #f0c040; border: 1px solid rgba(240,192,64,0.25); border-radius: 20px; padding: 6px 18px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 22px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .btn-hero { background: linear-gradient(135deg, #f0c040, #d4a017); color: #1a1a2e; font-weight: 700; border: none; border-radius: 30px; padding: 16px 42px; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
         .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(240,192,64,0.4); color: #1a1a2e; }
-        .btn-hero-outline { background: transparent; color: #f0c040; font-weight: 700; border: 2px solid #f0c040; border-radius: 30px; padding: 12px 32px; font-size: 1rem; transition: all 0.2s; }
+        .btn-hero-outline { background: transparent; color: #f0c040; font-weight: 700; border: 2px solid #f0c040; border-radius: 30px; padding: 14px 36px; font-size: 1rem; transition: all 0.2s; }
         .btn-hero-outline:hover { background: #f0c040; color: #1a1a2e; }
-        .hero-ring { font-size: 5rem; animation: float 3s ease-in-out infinite; display: inline-block; }
+        .hero-ring { font-size: 5.5rem; animation: float 3s ease-in-out infinite; display: inline-block; }
         @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
         /* ---- COMPONENT CARDS ---- */
-        .section-title { font-weight: 800; color: #1a1a2e; font-size: 2rem; }
-        .section-sub { color: #888; font-size: 1rem; }
+        .section-title { font-weight: 800; color: #120b24; font-size: 2.25rem; letter-spacing: -0.5px; }
+        .section-sub { color: #828294; font-size: 1.05rem; }
         .comp-card {
             background: white;
-            border-radius: 18px;
-            border: none;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-            transition: transform 0.25s, box-shadow 0.25s;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.03);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
             overflow: hidden;
             height: 100%;
         }
-        .comp-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.13); }
-        .comp-card .card-accent { height: 5px; }
-        .comp-card .card-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 16px; }
-        .comp-card h5 { font-weight: 700; color: #1a1a2e; font-size: 1.15rem; }
-        .comp-card p { color: #777; font-size: 0.9rem; line-height: 1.6; }
-        .comp-card .btn-card { border-radius: 20px; font-weight: 600; font-size: 0.9rem; padding: 8px 22px; border: none; }
-        .tag-crud { font-size: 0.75rem; font-weight: 600; color: #888; background: #f5f5f5; border-radius: 10px; padding: 3px 10px; }
-
-        /* ---- STATS ---- */
-        .stats-bar { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 18px; padding: 40px; color: white; }
-        .stat-item h3 { font-weight: 800; font-size: 2.5rem; color: #f0c040; margin-bottom: 4px; }
-        .stat-item p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0; }
+        .comp-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+        .comp-card .card-accent { height: 6px; }
+        .comp-card .card-icon { width: 60px; height: 60px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.7rem; margin-bottom: 20px; }
+        .comp-card h5 { font-weight: 700; color: #120b24; font-size: 1.2rem; margin-bottom: 12px; }
+        .comp-card p { color: #626274; font-size: 0.92rem; line-height: 1.65; }
+        .comp-card .btn-card { border-radius: 20px; font-weight: 600; font-size: 0.88rem; padding: 10px 24px; border: none; transition: transform 0.2s ease; }
+        .comp-card .btn-card:hover { transform: translateY(-1px); }
+        .tag-crud { font-size: 0.72rem; font-weight: 700; color: #828294; background: #f2f2f7; border-radius: 8px; padding: 4px 12px; letter-spacing: 0.5px; }
 
         /* ---- FOOTER ---- */
-        footer { background: #1a1a2e; color: rgba(255,255,255,0.5); font-size: 0.85rem; }
-        footer .gold { color: #f0c040; font-weight: 700; }
+        .minimalist-footer {
+            background: transparent;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 40px 0;
+            color: #828294;
+            font-size: 0.88rem;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +91,7 @@
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
             <div class="navbar-nav ms-auto align-items-center gap-2">
-                <a class="nav-link" href="/"><i class="bi bi-house me-1"></i>Home</a>
+                <a class="nav-link active" href="/"><i class="bi bi-house me-1"></i>Home</a>
                 <a class="nav-link" href="/vendors"><i class="bi bi-shop me-1"></i>Vendors</a>
                 <a class="nav-link" href="/bookings"><i class="bi bi-calendar-check me-1"></i>Bookings</a>
                 <a class="nav-link" href="/payments"><i class="bi bi-credit-card me-1"></i>Payments</a>
@@ -113,9 +115,9 @@
     <div class="container position-relative">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <span class="badge-tag"><i class="bi bi-mortarboard me-1"></i> SE1020 — OOP Project</span>
+                <span class="badge-tag"><i class="bi bi-shield-check me-1"></i> Next-Gen Wedding Coordination Suite</span>
                 <h1>Plan Your Perfect<br>Wedding with TTT</h1>
-                <p class="my-4">A complete wedding planning management system built with Spring Boot, MySQL, and pure OOP principles. Manage clients, bookings, and payments all in one place.</p>
+                <p class="my-4">An enterprise-grade, zero-dependency wedding planning management suite. Seamlessly choreograph vendors, bookings, schedules, and payments on a unified, high-performance architecture.</p>
                 <div class="d-flex gap-3 flex-wrap">
                     <a href="/register" class="btn-hero">Get Started <i class="bi bi-arrow-right ms-1"></i></a>
                     <a href="/login" class="btn-hero-outline">Sign In</a>
@@ -129,36 +131,10 @@
     </div>
 </section>
 
-<!-- ===== STATS BAR ===== -->
-<section class="py-5">
-    <div class="container">
-        <div class="stats-bar">
-            <div class="row text-center">
-                <div class="col-md-3 col-6 stat-item">
-                    <h3>6</h3>
-                    <p>Team Members</p>
-                </div>
-                <div class="col-md-3 col-6 stat-item">
-                    <h3>6</h3>
-                    <p>CRUD Components</p>
-                </div>
-                <div class="col-md-3 col-6 stat-item">
-                    <h3>5</h3>
-                    <p>OOP Principles</p>
-                </div>
-                <div class="col-md-3 col-6 stat-item">
-                    <h3>File I/O</h3>
-                    <p>Plain Text Databases</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- ===== MODULE CARDS ===== -->
-<section class="py-5" id="modules">
+<section style="padding: 120px 0 100px;" id="modules">
     <div class="container">
-        <div class="text-center mb-5">
+        <div class="text-center mb-5 pb-3">
             <h2 class="section-title">System Modules</h2>
             <p class="section-sub">Each module is a fully independent component with complete CRUD operations</p>
         </div>
@@ -175,7 +151,7 @@
                         <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
                         <h5>Component 1 — Couple/User Management</h5>
                         <p>Register couples, secure login with sessions, manage wedding profiles (date, budget, theme, guest count). OOP: Inheritance · Polymorphism · Encapsulation.</p>
-                        <a href="/register" class="btn btn-card text-white" style="background:linear-gradient(135deg,#4776E6,#8E54E9)">Access Portal →</a>
+                        <a href="/register" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#4776E6,#8E54E9)">Access Portal →</a>
                     </div>
                 </div>
             </div>
@@ -191,7 +167,7 @@
                         <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
                         <h5>Component 2 — Vendor Management</h5>
                         <p>Register venues, photographers &amp; caterers. Filter by category. OOP: Abstraction (calculatePricing) · Inheritance (VenueVendor, PhotographyVendor, CateringVendor).</p>
-                        <a href="/vendors" class="btn btn-card text-white" style="background:linear-gradient(135deg,#f953c6,#b91d73)">Browse Vendors →</a>
+                        <a href="/vendors" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#f953c6,#b91d73)">Browse Vendors →</a>
                     </div>
                 </div>
             </div>
@@ -207,7 +183,7 @@
                         <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
                         <h5>Component 3 — Booking &amp; Payment</h5>
                         <p>Send booking requests, track status (PENDING → CONFIRMED), process payments. Confirming payment auto-updates booking status. OOP: Encapsulation · Abstraction.</p>
-                        <a href="/bookings" class="btn btn-card" style="background:linear-gradient(135deg,#f0c040,#d4a017);color:#1a1a2e;">View Bookings →</a>
+                        <a href="/bookings" class="btn btn-card mt-3" style="background:linear-gradient(135deg,#f0c040,#d4a017);color:#1a1a2e;">View Bookings →</a>
                     </div>
                 </div>
             </div>
@@ -223,7 +199,7 @@
                         <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
                         <h5>Component 4 — Wedding Planning Tools</h5>
                         <p>Interactive checklist with progress tracking, budget tracker (estimated vs actual), and guest list with RSVP management. OOP: Encapsulation · Association.</p>
-                        <a href="/planning/checklist" class="btn btn-card text-white" style="background:linear-gradient(135deg,#11998e,#38ef7d);color:#1a1a2e!important;">Open Planner →</a>
+                        <a href="/planning/checklist" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#11998e,#38ef7d);color:#1a1a2e!important;">Open Planner →</a>
                     </div>
                 </div>
             </div>
@@ -239,7 +215,7 @@
                         <span class="tag-crud mb-2 d-inline-block">CREATE · READ · UPDATE · DELETE</span>
                         <h5>Component 5 — Reviews &amp; Ratings</h5>
                         <p>Rate vendors 1–5 stars, write reviews, sort by rating or date. Two review types: Verified (editable) &amp; Public (final). OOP: Inheritance · Abstraction (canEdit()).</p>
-                        <a href="/reviews" class="btn btn-card" style="background:linear-gradient(135deg,#f7971e,#ffd200);color:#1a1a2e;">View Reviews →</a>
+                        <a href="/reviews" class="btn btn-card mt-3" style="background:linear-gradient(135deg,#f7971e,#ffd200);color:#1a1a2e;">View Reviews →</a>
                     </div>
                 </div>
             </div>
@@ -255,27 +231,19 @@
                         <span class="tag-crud mb-2 d-inline-block">READ · UPDATE · DELETE</span>
                         <h5>Component 6 — Admin Dashboard</h5>
                         <p>Platform-wide analytics: total users, vendors, bookings, revenue. Manage and delete users, vendors &amp; reviews. Cross-component data aggregation. OOP: Encapsulation.</p>
-                        <a href="/admin" class="btn btn-card text-white" style="background:linear-gradient(135deg,#1a1a2e,#4776E6)">Admin Panel →</a>
+                        <a href="/admin" class="btn btn-card text-white mt-3" style="background:linear-gradient(135deg,#1a1a2e,#4776E6)">Admin Panel →</a>
                     </div>
                 </div>
             </div>
 
         </div>
-
-        <!-- OOP Link -->
-        <div class="text-center mt-5">
-            <a href="/oop" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-600">
-                <i class="bi bi-diagram-3 me-2"></i>View OOP Concepts Used in This Project
-            </a>
-        </div>
     </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<footer class="py-4 mt-4">
+<!-- ===== MINIMALIST FOOTER ===== -->
+<footer class="minimalist-footer">
     <div class="container text-center">
-        <p class="mb-0">© 2026 <span class="gold">Tie The Tech (TTT)</span> — SE1020 Object Oriented Programming Project</p>
-        <p class="mt-1 mb-0">Built with Spring Boot · Java File Persistence (`java.io`) · Bootstrap 5</p>
+        <p class="mb-0 text-muted">© 2026 TTT. All Rights Reserved.</p>
     </div>
 </footer>
 
