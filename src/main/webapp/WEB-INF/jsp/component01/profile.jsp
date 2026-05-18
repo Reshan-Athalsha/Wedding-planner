@@ -9,18 +9,28 @@
         <c:if test="${not empty success}">
             <div class="alert alert-success bg-success bg-opacity-20 border-success text-light small py-2 mb-3" style="border-radius: 10px;">${success}</div>
         </c:if>
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger bg-danger bg-opacity-20 border-danger text-light small py-2 mb-3" style="border-radius: 10px;">${error}</div>
+        </c:if>
         
         <div class="premium-card p-4">
-            <h2 class="h4 fw-bold mb-3"><i class="bi bi-person-circle text-warning me-2"></i>My Profile</h2>
+            <h2 class="h4 fw-bold mb-4"><i class="bi bi-person-circle text-warning me-2"></i>My Profile</h2>
             
             <c:if test="${not empty coupleUser}">
-                <div class="d-flex gap-2 mb-4">
-                    <span class="badge bg-primary bg-opacity-20 text-warning border border-warning border-opacity-25 py-2 px-3 rounded-pill">ID: ${coupleUser.userId}</span>
-                    <span class="badge bg-primary bg-opacity-20 text-warning border border-warning border-opacity-25 py-2 px-3 rounded-pill">Role: ${coupleUser.role}</span>
-                </div>
-                
                 <form method="post" action="/profile/update">
                     <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-white-50 small text-uppercase">User ID (ID Number)</label>
+                            <input type="text" name="userId" class="form-control bg-dark-transparent text-white border-secondary" value="${coupleUser.userId}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-white-50 small text-uppercase">Role</label>
+                            <select name="role" class="form-select bg-dark-transparent text-white border-secondary" required>
+                                <option class="bg-dark" value="COUPLE" ${coupleUser.role == 'COUPLE' ? 'selected' : ''}>COUPLE</option>
+                                <option class="bg-dark" value="ADMIN" ${coupleUser.role == 'ADMIN' ? 'selected' : ''}>ADMIN</option>
+                                <option class="bg-dark" value="VENDOR" ${coupleUser.role == 'VENDOR' ? 'selected' : ''}>VENDOR</option>
+                            </select>
+                        </div>
                         <div class="col-md-6">
                             <label class="form-label text-white-50 small text-uppercase">Full Name</label>
                             <input type="text" name="name" class="form-control bg-dark-transparent text-white border-secondary" value="${coupleUser.name}" required>
