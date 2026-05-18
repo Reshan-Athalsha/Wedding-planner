@@ -1,18 +1,13 @@
 ﻿package com.ttt.component06.controller;
 
-import com.ttt.component06.model.AdminActivity;
-import com.ttt.component06.repository.AdminRepository;
+import com.ttt.component06.model.*;
+import com.ttt.component06.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.springframework.web.bind.annotation.*;
+import java.nio.file.*;
+import java.time.LocalDate;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -21,17 +16,12 @@ import java.util.stream.Stream;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private AdminRepository adminRepository;
+    @Autowired private AdminRepository adminRepository;
+    @Autowired private AnnouncementRepository announcementRepository;
 
     @GetMapping
     public String adminDashboard(Model model) {
-        // 1. Log this admin action using Component 6 Repository
-        String logId = "LOG-" + UUID.randomUUID().toString().substring(0, 5).toUpperCase();
-        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        adminRepository.saveLog(new AdminActivity(logId, "Viewed Admin Dashboard", now));
-
-        // 2. Read system stats
+        // Analytics
         model.addAttribute("userCount",    countLines("data/users.txt"));
         model.addAttribute("vendorCount",  countLines("data/vendors.txt"));
         model.addAttribute("bookingCount", countLines("data/bookings.txt"));
@@ -39,24 +29,49 @@ public class AdminController {
         model.addAttribute("reviewCount",  countLines("data/reviews.txt"));
         model.addAttribute("taskCount",    countLines("data/tasks.txt"));
         
-        // 3. Pass logs to view if needed
-        model.addAttribute("adminLogs", adminRepository.findAllLogs());
-
+        // Announcements
+        model.addAttribute("announcements", announcementRepository.findAll());
         return "component06/adminDashboard";
     }
 
-    @GetMapping("/oop")
-    public String oopOverview() {
-        return "component06/oop";
+    // --- ADMIN CRUD ---
+    @GetMapping("/admins")
+    public String listAdmins(Model model) {
+        model.addAttribute("admins", adminRepository.findAll());
+        return "component06/admins";
+    }
+
+    @PostMapping("/admins/new")
+    public String createAdmin(@RequestParam String username, @RequestParam String email, 
+                              @RequestParam String password, @RequestParam String role) {
+        String id = "ADM-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+        Admin admin = "SUPER_ADMIN".equals(role) ? new SuperAdmin(id, username, password, email) 
+                                                 : new ModeratorAdmin(id, username, password, email);
+        adminRepository.save(admin);
+        return "redirect:/admin/admins";
+    }
+
+    @GetMapping("/admins/delete/{id}")
+    public String deleteAdmin(@PathVariable String id) {
+        adminRepository.delete(id); return "redirect:/admin/admins";
+    }
+
+    // --- ANNOUNCEMENT CRUD ---
+    @PostMapping("/announcements/new")
+    public String createAnnouncement(@RequestParam String title, @RequestParam String content) {
+        String id = "ANN-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
+        announcementRepository.save(new Announcement(id, title, content, LocalDate.now().toString()));
+        return "redirect:/admin";
+    }
+    
+    @GetMapping("/announcements/delete/{id}")
+    public String deleteAnnouncement(@PathVariable String id) {
+        announcementRepository.delete(id); return "redirect:/admin";
     }
 
     private long countLines(String filePath) {
         Path path = Paths.get(filePath);
         if (!Files.exists(path)) return 0;
-        try (Stream<String> lines = Files.lines(path)) {
-            return lines.filter(l -> !l.trim().isEmpty()).count();
-        } catch (Exception e) {
-            return 0;
-        }
+        try (Stream<String> lines = Files.lines(path)) { return lines.filter(l -> !l.trim().isEmpty()).count(); } catch (Exception e) { return 0; }
     }
 }

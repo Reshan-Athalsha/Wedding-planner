@@ -1,50 +1,37 @@
 ﻿package com.ttt.component06.repository;
-
-import com.ttt.component06.model.AdminActivity;
+import com.ttt.component06.model.Admin;
+import com.ttt.component06.model.ModeratorAdmin;
+import com.ttt.component06.model.SuperAdmin;
 import org.springframework.stereotype.Repository;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/** COMPONENT 06 — AdminRepository | OOP: INFORMATION HIDING */
 @Repository
 public class AdminRepository {
-    private static final String FILE_PATH = "data/admin_logs.txt";
-
-    private File getFile() {
-        File file = new File(FILE_PATH);
-        file.getParentFile().mkdirs();
-        return file;
-    }
-
-    public void saveLog(AdminActivity activity) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(getFile(), true))) {
-            bw.write(activity.toFileString());
-            bw.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<AdminActivity> findAllLogs() {
-        List<AdminActivity> logs = new ArrayList<>();
-        File file = getFile();
-        if (!file.exists()) return logs;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    String[] parts = line.split("\\|", -1);
-                    if (parts.length >= 3) {
-                        logs.add(new AdminActivity(parts[0], parts[1], parts[2]));
-                    }
+    private final String FILE = "data/admins.txt";
+    private File getFile() { File f=new File(FILE); f.getParentFile().mkdirs(); return f; }
+    public List<Admin> findAll() {
+        List<Admin> list = new ArrayList<>();
+        if(!getFile().exists()) return list;
+        try(BufferedReader br=new BufferedReader(new FileReader(getFile()))) {
+            String line; while((line=br.readLine())!=null) {
+                if(line.trim().isEmpty()) continue;
+                String[] p = line.split("\\|");
+                if(p.length>=5) {
+                    if("SUPER_ADMIN".equals(p[4])) list.add(new SuperAdmin(p[0],p[1],p[2],p[3]));
+                    else list.add(new ModeratorAdmin(p[0],p[1],p[2],p[3]));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return logs;
+        } catch(Exception e) {}
+        return list;
+    }
+    public void save(Admin admin) {
+        List<Admin> all=findAll(); boolean found=false;
+        for(int i=0;i<all.size();i++){ if(all.get(i).getAdminId().equals(admin.getAdminId())){ all.set(i,admin); found=true; break; } }
+        if(!found) all.add(admin); writeAll(all);
+    }
+    public void delete(String id) { List<Admin> all=findAll(); all.removeIf(a->a.getAdminId().equals(id)); writeAll(all); }
+    private void writeAll(List<Admin> all) {
+        try(BufferedWriter bw=new BufferedWriter(new FileWriter(getFile()))) { for(Admin a:all){ bw.write(a.toFileString()); bw.newLine(); } } catch(Exception e){}
     }
 }
