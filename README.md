@@ -1,52 +1,50 @@
-﻿# Component 05 - Reviews and Rating System
+﻿# Component 01 - User Management
 
-**Developer:** Rupasinghe S.L.S - IT25XXXXXX
-**Branch:** Reviews-and-Rating-System-Rupasinghe.S.L.S
+**Developer:** Athalsha R.R - IT25101874
+**Branch:** User-Management---Athalsha-R-R
 **Course:** SE1020 OOP Group Project | Tie The Tech (TTT) | SLIIT
 
 ---
 
 ## What This Component Does
-Allows couples to leave star-rated reviews for vendors.
-Two review types are supported: VerifiedReview (from confirmed bookings)
-and PublicReview (open to all). Average ratings calculated per vendor.
-All data stored in data/reviews.txt.
+Manages couple/user accounts for the wedding planning system.
+Handles registration, login, profile updates, and logout with session tracking.
+All data stored in data/users.txt (pipe-delimited, no database).
 
 ## Routes
 | Action | Route |
 |---|---|
-| All Reviews | GET /reviews |
-| Sort Reviews | GET /reviews?sort=rating |
-| Submit Review | GET /reviews/submit |
-| Post Review | POST /reviews/submit |
-| Edit Review | GET /reviews/edit/{id} |
-| Delete Review | GET /reviews/delete/{id} |
+| Register | GET/POST /register |
+| Login | GET/POST /login |
+| View Profile | GET /profile |
+| Update Profile | POST /profile/update |
+| Delete Account | POST /profile/delete |
+| Logout | GET /logout |
 
 ## My Files
 ```
-src/main/java/com/ttt/component05/
+src/main/java/com/ttt/component01/
   model/
-    Review.java           (abstract base class)
-    VerifiedReview.java   (extends Review - from confirmed bookings)
-    PublicReview.java     (extends Review - open reviews)
+    User.java              (abstract base class)
+    CoupleUser.java        (concrete - extends User)
   repository/
-    ReviewRepository.java (reads/writes data/reviews.txt)
+    CoupleUserRepository.java  (reads/writes data/users.txt)
   controller/
-    ReviewController.java (Spring MVC controller)
+    UserController.java    (Spring MVC controller)
 
-src/main/webapp/WEB-INF/jsp/component05/
-  reviews.jsp, reviewForm.jsp, editReview.jsp
+src/main/webapp/WEB-INF/jsp/component01/
+  login.jsp, register.jsp, profile.jsp
 ```
 
 ## OOP Principles
-- **Abstraction**: Review is abstract with abstract getReviewType()
-- **Inheritance**: VerifiedReview and PublicReview extend Review
-- **Polymorphism**: Repository saves/loads any Review subtype uniformly
-- **Encapsulation**: All fields private with getters/setters
-- **Information Hiding**: Star rating logic in Review, file I/O in repository
+- **Abstraction**: User is abstract with abstract validate()
+- **Inheritance**: CoupleUser extends User  
+- **Encapsulation**: All fields private, accessed via getters/setters
+- **Polymorphism**: Controller stores via User reference, retrieves CoupleUser
+- **Information Hiding**: Password hashing hidden in CoupleUser
 
 ## Run
 ```bash
 mvn spring-boot:run
-# Visit: http://localhost:8080/reviews
+# Visit: http://localhost:8080/register
 ```
