@@ -1,19 +1,19 @@
-<!-- ===== MINIMALIST FOOTER ===== -->
+
 <footer class="py-4 mt-5 text-center border-top border-light" style="background: transparent;">
     <div class="container text-muted small">
         <p class="mb-0">&copy; 2026 TTT. All Rights Reserved.</p>
     </div>
 </footer>
 
-<!-- ===== BACKGROUND PARTICLE OVERLAY ===== -->
+
 <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></div>
 
-<!-- Bootstrap & ParticlesJS Script Libraries -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
 <script>
-    /* ParticlesJS Configuration for Levitating Gold Hearts */
+
     particlesJS('particles-js', {
         "particles": {
             "number": {

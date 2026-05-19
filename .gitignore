@@ -1,4 +1,3 @@
-### Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -10,25 +9,20 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-### IDE - IntelliJ
 .idea/
 *.iws
 *.iml
 *.ipr
 out/
 
-### IDE - VS Code
 .vscode/
 
-### IDE - Eclipse
 .project
 .classpath
 .settings/
 
-### OS
 .DS_Store
 Thumbs.db
 
-### Spring Boot
 *.log
 spring-shell.log

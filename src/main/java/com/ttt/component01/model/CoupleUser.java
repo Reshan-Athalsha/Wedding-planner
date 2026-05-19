@@ -1,6 +1,6 @@
 package com.ttt.component01.model;
 
-/** COMPONENT 01 — CoupleUser | OOP: INHERITANCE · POLYMORPHISM · ENCAPSULATION */
+
 public class CoupleUser extends User {
     private String weddingDate;
     private double budget;
