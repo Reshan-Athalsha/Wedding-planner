@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.util.*;
 
-/** COMPONENT 01 — File-based CoupleUser Repository | OOP: ENCAPSULATION · INFORMATION HIDING · FILE I/O */
+
 @Repository
 public class CoupleUserRepository {
     private static final String FILE_PATH = "data/users.txt";

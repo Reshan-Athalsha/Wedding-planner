@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
-<!-- ===== HERO ===== -->
+
 <section class="hero">
     <div class="container position-relative">
         <div class="row align-items-center">
@@ -34,7 +34,7 @@
     </div>
 </section>
 
-<!-- ===== MODULE CARDS ===== -->
+
 <section class="section-spacer" id="modules">
     <div class="container">
         <div class="text-center mb-5 pb-3">
@@ -43,7 +43,7 @@
         </div>
         <div class="row g-4">
 
-            <!-- Component 1: Couple/User Management -->
+
             <div class="col-md-4">
                 <div class="premium-card">
                     <div class="card-accent" style="background: linear-gradient(90deg, #4776E6, #8E54E9);"></div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <!-- Component 2: Vendor Management -->
+
             <div class="col-md-4">
                 <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #f953c6, #b91d73);"></div>
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <!-- Component 3: Booking & Payment -->
+
             <div class="col-md-4">
                 <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #f0c040, #d4a017);"></div>
@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <!-- Component 4: Wedding Planning Tools -->
+
             <div class="col-md-4">
                 <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #11998e, #38ef7d);"></div>
@@ -107,7 +107,7 @@
                 </div>
             </div>
 
-            <!-- Component 5: Reviews & Ratings -->
+
             <div class="col-md-4">
                 <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #f7971e, #ffd200);"></div>
@@ -123,7 +123,7 @@
                 </div>
             </div>
 
-            <!-- Component 6: Admin Dashboard -->
+
             <div class="col-md-4">
                 <div class="premium-card" style="opacity: 0.7;">
                     <div class="card-accent" style="background: linear-gradient(90deg, #1a1a2e, #4776E6);"></div>

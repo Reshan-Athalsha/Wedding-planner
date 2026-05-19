@@ -2,7 +2,7 @@ package com.ttt.component01.model;
 
 import com.ttt.shared.FileOperations;
 
-/** COMPONENT 01 — User Management | OOP: ABSTRACTION · ENCAPSULATION · INTERFACE */
+
 public abstract class User implements FileOperations {
     private String userId;
     private String name;
@@ -15,7 +15,7 @@ public abstract class User implements FileOperations {
         this.userId = userId; this.name = name; this.email = email; this.password = password; this.role = role;
     }
 
-    public abstract void displayRoleDetails(); // ABSTRACTION
+    public abstract void displayRoleDetails();
 
     @Override
     public String toFileString() { return userId+"|"+name+"|"+email+"|"+password+"|"+role; }

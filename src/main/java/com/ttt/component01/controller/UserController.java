@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 import java.util.UUID;
 
-/** COMPONENT 01 — Couple/User Management Controller | Full CRUD */
+
 @Controller
 public class UserController {
     @Autowired private CoupleUserRepository userRepository;
@@ -26,8 +26,8 @@ public class UserController {
         String cleanedEmail = SecurityUtils.clean(email);
         String cleanedPassword = SecurityUtils.clean(password);
 
-        if (cleanedName == null || cleanedName.isEmpty() || 
-            cleanedEmail == null || cleanedEmail.isEmpty() || 
+        if (cleanedName == null || cleanedName.isEmpty() ||
+            cleanedEmail == null || cleanedEmail.isEmpty() ||
             cleanedPassword == null || cleanedPassword.isEmpty()) {
             model.addAttribute("error", "All fields are required."); return "component01/register";
         }
@@ -35,7 +35,7 @@ public class UserController {
             model.addAttribute("error", "An account with this email already exists."); return "component01/register";
         }
         String uid = "USR-" + UUID.randomUUID().toString().substring(0,5).toUpperCase();
-        User newUser = new CoupleUser(uid, cleanedName, cleanedEmail, cleanedPassword); // POLYMORPHISM
+        User newUser = new CoupleUser(uid, cleanedName, cleanedEmail, cleanedPassword);
         userRepository.save((CoupleUser) newUser);
         return "redirect:/login?registered=true";
     }
@@ -82,12 +82,12 @@ public class UserController {
         if (oldUid == null) return "redirect:/login";
         CoupleUser user = userRepository.findById(oldUid).orElse(null);
         if (user == null) return "redirect:/login";
-        
+
         String cleanedName = SecurityUtils.clean(name);
         String cleanedUserId = SecurityUtils.clean(userId);
         String cleanedRole = SecurityUtils.clean(role);
-        
-        // Prevent duplicate user IDs in repository
+
+
         if (!cleanedUserId.equals(oldUid) && userRepository.findById(cleanedUserId).isPresent()) {
             model.addAttribute("error", "User ID already taken. Please choose a different ID.");
             model.addAttribute("coupleUser", user);
@@ -100,15 +100,15 @@ public class UserController {
         if (budget > 0) user.setBudget(budget);
         if (guestCount > 0) user.setGuestCount(guestCount);
         if (theme != null && !theme.isEmpty()) user.setTheme(SecurityUtils.clean(theme));
-        
+
         user.setRole(cleanedRole);
-        
+
         if (!cleanedUserId.equals(oldUid)) {
             userRepository.deleteById(oldUid);
             user.setUserId(cleanedUserId);
             session.setAttribute("userId", cleanedUserId);
         }
-        
+
         userRepository.save(user);
         session.setAttribute("userName", cleanedName);
         session.setAttribute("userRole", cleanedRole);

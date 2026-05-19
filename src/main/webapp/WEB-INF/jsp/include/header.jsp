@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tie The Tech — Next-Gen Wedding Coordination Suite</title>
-    <!-- Bootstrap 5 CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Custom Outfit Font -->
+
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-        
+
         * { font-family: 'Outfit', sans-serif; }
         body {
             background: linear-gradient(135deg, #160f29 0%, #2b193d 100%);
@@ -23,11 +23,11 @@
             overflow-x: hidden;
         }
 
-        /* Ensure headings and text contrast well against the dark background */
+
         h1, h2, h3, h4, h5, h6, .text-dark, .section-title { color: #ffffff !important; }
         .text-muted, .section-sub { color: #a19ba8 !important; }
 
-        /* ---- CENTRALIZED NAVBAR ---- */
+
         .ttt-navbar {
             background: linear-gradient(135deg, #120b24 0%, #0d1220 100%);
             padding: 16px 0;
@@ -40,7 +40,7 @@
         .ttt-navbar .btn-nav-login { background: #f0c040; color: #1a1a2e; font-weight: 700; border: none; border-radius: 20px; padding: 6px 22px; transition: all 0.2s ease; }
         .ttt-navbar .btn-nav-login:hover { background: #d4a017; color: #1a1a2e; transform: translateY(-1px); }
 
-        /* ---- PREMIUM DESIGN COMPONENT CARDS ---- */
+
         .premium-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -62,7 +62,7 @@
         .premium-card .btn-card { border-radius: 20px; font-weight: 600; font-size: 0.88rem; padding: 10px 24px; border: none; transition: transform 0.2s ease; }
         .premium-card .btn-card:hover { transform: translateY(-1px); }
 
-        /* ---- REFINEMENTS & WHITESPACE ---- */
+
         .section-spacer {
             padding: 120px 0;
         }
@@ -71,18 +71,18 @@
         .bg-indigo { background-color: #120b24 !important; }
         .bg-gold { background-color: #f0c040 !important; }
 
-        /* Form Input Readability Fix */
+
         .form-control, .form-select {
-            color: #120b24 !important; /* Force dark text inside inputs */
+            color: #120b24 !important;
         }
         .form-control::placeholder {
-            color: #6c757d !important; /* Keep placeholders a standard grey */
+            color: #6c757d !important;
         }
     </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
+
 <nav class="navbar navbar-expand-lg ttt-navbar">
     <div class="container">
         <a class="navbar-brand" href="/"><i class="bi bi-heart-fill text-warning me-1"></i> Tie The Tech</a>
